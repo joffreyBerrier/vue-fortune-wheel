@@ -15,175 +15,211 @@ export default defineComponent({
   },
   data() {
     return {
+      arcs: null,
+      container: null,
+      colors: ["#eb9b51", "#028b8c"] as string[],
       data: [
         {
-          label: "Dell LAPTOP",
+          label: "Fish and Chips",
           value: 1,
           question:
             "What CSS property is used for specifying the area between the content and its border?",
         },
         {
-          label: "IMAC PRO",
+          label: "M in Black Burger",
           value: 2,
           question: "What CSS property is used for changing the font?",
         },
         {
-          label: "SUZUKI",
+          label: "Pack de 3 bières",
           value: 3,
           question: "What CSS property is used for changing the color of text?",
         },
         {
-          label: "HONDA",
+          label: "Fish Balls x6",
           value: 4,
           question:
             "What CSS property is used for changing the boldness of text?",
         },
         {
-          label: "FERRARI",
+          label: "Jus de fruits",
           value: 5,
           question: "What CSS property is used for changing the size of text?",
         },
         {
-          label: "APARTMENT",
+          label: "Dessert maison",
           value: 6,
           question:
             "What CSS property is used for changing the background color of a box?",
         },
       ],
+      color: {
+        bgCircle: "#ffffff",
+        borderCircle: "#000000",
+        arrowBg: "#eb9b51",
+        strokeSlice: "#000000",
+        text: "#ffffff",
+      },
+      pie: null,
       vis: null,
-      width: 500 as number,
-      height: 500 as number,
+      width: 600 as number,
+      height: 600 as number,
       padding: {
         top: 20,
         right: 40,
         bottom: 0,
         left: 0,
       },
+      svg: null,
       oldrotation: 0 as number,
       picked: 100000 as number,
       rotation: 0 as number,
     };
   },
   mounted() {
-    const padding = { top: 20, right: 40, bottom: 0, left: 0 };
-    const width = 500 - padding.left - padding.right;
-    const height = 500 - padding.top - padding.bottom;
-    const rayon = Math.min(width, height) / 2;
-    const oldpick = [];
-    const colors = ["#2196f3", "#ffc107"];
+    this.width = this.width - this.padding.left - this.padding.right;
+    this.height = this.width;
+    this.rayon = Math.min(this.width, this.height - 10) / 2;
 
     // Create Svg
-    const svgWidth = width + padding.left + padding.right;
-    const svgHeight = height + padding.top + padding.bottom;
-    const svg = d3
-      .select("#chart")
-      .append("svg")
-      .data([this.data])
-      .attr("width", svgWidth)
-      .attr("height", svgHeight);
+    this.createSvg();
 
     // Create Group container
-    const createPathForGroupContainer = () => {
-      const translate = width / 2 + padding.left;
-      const h = height / 2 + padding.top;
-
-      return `translate(${translate},${h})`;
-    };
-    const transformAttr = createPathForGroupContainer();
-    const container = svg
-      .append("g")
-      .attr("class", "chartholder")
-      .attr("transform", transformAttr);
-
-    // Create a G on container
-    this.vis = container.append("g");
-
-    const pie = d3
-      .pie()
-      .sort(null)
-      .value(() => {
-        return 1;
-      });
+    this.createVis();
 
     // Declare an arc generator function
-    const arc = d3.arc().outerRadius(rayon).innerRadius(0);
-
-    // Select paths, use arc generator to draw
-    const arcs = this.vis
-      .selectAll("g.slice")
-      .data(pie)
-      .enter()
-      .append("g")
-      .attr("class", "slice");
-
-    arcs
-      .append("path")
-      .attr("fill", (_, i) => {
-        return colors[i % 2];
-      })
-      .attr("d", (d) => {
-        console.log('iiiiii')
-        return arc(d);
-      });
+    this.createArc();
 
     // Add the text
-    const createPathForText = (d) => {
-      const rotate = (d.angle * 180) / Math.PI - 90;
-      const translate = d.outerRadius - 10;
-
-      return `rotate(${rotate}) translate(${translate})`;
-    };
-
-    arcs
-      .append("text")
-      .attr("transform", (d) => {
-        d.innerRadius = 0;
-        d.outerRadius = rayon;
-        d.angle = (d.startAngle + d.endAngle) / 2;
-
-        return createPathForText(d);
-      })
-      .attr("text-anchor", "end")
-      .text((d, i) => {
-        return this.data[i].label;
-      });
+    this.addText();
 
     // Make arrow
-    const createPathArrowValue = () => {
-      const translateX = width + padding.left + padding.right;
-      const translateY = height / 2 + padding.top;
+    this.createArrow();
 
-      return `translate(${translateX}, ${translateY})`;
-    };
-
-    const pathArrow = `M-${rayon * 0.15},0L0,${rayon * 0.05}L0,-${
-      rayon * 0.05
-    }Z`;
-
-    svg
-      .append("g")
-      .attr("transform", createPathArrowValue())
-      .append("path")
-      .attr("d", pathArrow)
-      .style({ fill: "black" });
-
-    //draw spin circle
-    container
-      .append("circle")
-      .attr("cx", 0)
-      .attr("cy", 0)
-      .attr("r", 100)
-      .style({ fill: "white", cursor: "pointer" });
-    //spin text
-    container
-      .append("text")
-      .attr("x", 0)
-      .attr("y", 15)
-      .attr("text-anchor", "middle")
-      .text("100% gagnant")
-      .style({ "font-weight": "bold", "font-size": "20px" });
+    // Make circle
+    this.createCircle();
   },
   methods: {
+    createSvg() {
+      const svgWidth = this.width + this.padding.left + this.padding.right;
+      const svgHeight = svgWidth;
+      this.svg = d3
+        .select("#chart")
+        .append("svg")
+        .data([this.data])
+        .attr("width", svgWidth)
+        .attr("height", svgHeight);
+    },
+    createVis() {
+      const createPathForGroupContainer = () => {
+        const translate = this.width / 2 + this.padding.left;
+        const h = this.height / 2 + this.padding.top;
+
+        return `translate(${translate},${h})`;
+      };
+
+      const transformAttr = createPathForGroupContainer();
+
+      this.container = this.svg
+        .append("g")
+        .attr("class", "chartholder")
+        .attr("transform", transformAttr);
+
+      // Create a G on container
+      this.vis = this.container.append("g");
+
+      this.pie = d3
+        .pie()
+        .sort(null)
+        .value(() => {
+          return 1;
+        });
+    },
+    createArc() {
+      const arc = d3.arc().outerRadius(this.rayon).innerRadius(0);
+
+      // Select paths and use arc generator to draw slice
+      this.arcs = this.vis
+        .selectAll("g.slice")
+        .data(this.pie)
+        .enter()
+        .append("g")
+        .attr("class", "slice");
+
+      this.arcs
+        .append("path")
+        .attr("fill", (_, i) => {
+          return this.colors[i % 2];
+        })
+        .attr("stroke", (_, i) => {
+          return this.color.strokeSlice;
+        })
+        .attr("stroke-width", (_, i) => {
+          return "3";
+        })
+        .attr("d", (d) => {
+          return arc(d);
+        });
+    },
+    addText() {
+      const createPathForText = (d) => {
+        const rotate = (d.angle * 180) / Math.PI - 90;
+        const translate = d.outerRadius - 10;
+
+        return `rotate(${rotate}) translate(${translate})`;
+      };
+
+      this.arcs
+        .append("text")
+        .attr("transform", (d) => {
+          d.outerRadius = this.rayon;
+          d.angle = (d.startAngle + d.endAngle) / 2;
+
+          return createPathForText(d);
+        })
+        .attr("text-anchor", "end")
+        .attr("fill", this.color.text)
+        .text((d, i) => {
+          return this.data[i].label;
+        });
+    },
+    createArrow() {
+      const createPathArrowValue = () => {
+        const translateX = this.width + this.padding.left + this.padding.right;
+        const translateY = this.height / 2 + this.padding.top;
+
+        return `translate(${translateX}, ${translateY})`;
+      };
+
+      const pathArrow = `M-${this.rayon * 0.15},0L0,${this.rayon * 0.05}L0,-${
+        this.rayon * 0.05
+      }Z`;
+
+      this.svg
+        .append("g")
+        .attr("transform", createPathArrowValue())
+        .append("path")
+        .attr("d", pathArrow)
+        .attr("fill", (_, i) => {
+          return this.color.arrowBg;
+        });
+    },
+    createCircle() {
+      this.container
+        .append("circle")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", this.width / 4)
+        .attr("fill", (_, i) => {
+          return this.color.bgCircle;
+        })
+        .attr("stroke", (_, i) => {
+          return this.color.borderCircle;
+        })
+        .attr("stroke-width", (_, i) => {
+          return "8px";
+        });
+    },
     async spin(d) {
       const dataLength = this.data.length;
       const ps = 360 / dataLength;
@@ -203,14 +239,14 @@ export default defineComponent({
         .attrTween("transform", this.rotTween)
         .end();
 
-        d3.select(".slice:nth-child(" + (this.picked + 1) + ") path").attr(
-          "fill",
-          "#e0e0e0"
-        );
-        console.log("DONE :", this.data[this.picked].value);
+      d3.select(".slice:nth-child(" + (this.picked + 1) + ") path").attr(
+        "fill",
+        "#e0e0e0"
+      );
+      console.log("DONE :", this.data[this.picked].value);
     },
     rotTween(to) {
-      const one = this.oldRotation % 360 || 0
+      const one = this.oldRotation % 360 || 0;
       const i = d3.interpolate(one, this.rotation);
 
       return (t) => {
@@ -221,38 +257,11 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
 text {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  pointer-events: none;
+  color: white;
 }
-
-#chart {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  top: 0;
-  left: 0;
-}
-
-#question {
-  position: absolute;
-  width: 400px;
-  height: 500px;
-  top: 0;
-  left: 520px;
-}
-
-#question h1 {
-  font-size: 50px;
-  font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: absolute;
-  padding: 0;
-  margin: 0;
-  top: 50%;
-  -webkit-transform: translate(0, -50%);
-  transform: translate(0, -50%);
+circle {
+  filter: drop-shadow(0px 8px 24px rgba(149, 157, 165, 0.2));
 }
 </style>
