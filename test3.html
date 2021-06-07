@@ -1,0 +1,280 @@
+<html>
+<body>
+  <head>
+    <style>
+      text {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11px;
+        pointer-events: none;
+      }
+
+      #chart {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        top: 0;
+        left: 0;
+      }
+
+      #question {
+        position: absolute;
+        width: 400px;
+        height: 500px;
+        top: 0;
+        left: 520px;
+      }
+
+      #question h1 {
+        font-size: 50px;
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        top: 50%;
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+      }
+    </style>
+  </head>
+  <div id="chart"></div>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script>
+    const padding = { top: 20, right: 40, bottom: 0, left: 0 };
+    const width = 500 - padding.left - padding.right;
+    const height = 500 - padding.top - padding.bottom;
+    const rayon = Math.min(width, height) / 2;
+    let rotation = 0;
+    let oldrotation = 0;
+    let picked = 100000;
+    const oldpick = [];
+    const colors = ['#2196f3', '#ffc107']
+
+    const data = [
+      {
+        label: "Dell LAPTOP",
+        value: 1,
+        question:
+          "What CSS property is used for specifying the area between the content and its border?",
+      },
+      {
+        label: "IMAC PRO",
+        value: 2,
+        question: "What CSS property is used for changing the font?",
+      },
+      {
+        label: "SUZUKI",
+        value: 3,
+        question: "What CSS property is used for changing the color of text?",
+      },
+      {
+        label: "HONDA",
+        value: 4,
+        question: "What CSS property is used for changing the boldness of text?",
+      },
+      {
+        label: "FERRARI",
+        value: 5,
+        question: "What CSS property is used for changing the size of text?",
+      },
+      {
+        label: "APARTMENT",
+        value: 6,
+        question:
+          "What CSS property is used for changing the background color of a box?",
+      }
+    ];
+
+    // Create Svg
+    const svgWidth = width + padding.left + padding.right
+    const svgHeight = height + padding.top + padding.bottom
+    const svg = d3
+      .select("#chart")
+      .append("svg")
+      .data([data])
+      .attr("width", svgWidth)
+      .attr("height", svgHeight);
+
+    // Create Group container
+    const createPathForGroupContainer = () => {
+      const translate = (width / 2) + padding.left
+      const h = (height / 2) + padding.top
+
+      return `translate(${translate},${h})`
+    }
+    const transformAttr = createPathForGroupContainer()
+    const container = svg
+      .append("g")
+      .attr("class", "chartholder")
+      .attr(
+        "transform",
+        transformAttr
+      );
+
+    // Create a G on container
+    const vis = container.append("g");
+
+    const pie = d3.layout
+      .pie()
+      .sort(null)
+      .value((d) => {
+        return 1;
+      });
+
+    // Declare an arc generator function
+    const arc = d3.svg.arc().outerRadius(rayon);
+
+    // Select paths, use arc generator to draw
+    const arcs = vis
+      .selectAll("g.slice")
+      .data(pie)
+      .enter()
+      .append("g")
+      .attr("class", "slice");
+
+    arcs
+      .append("path")
+      .attr("fill", (d, i) => {
+        return colors[i % 2];
+      })
+      .attr("d", (d) => {
+        return arc(d);
+      });
+
+    // Add the text
+    const createPathForText = (d) => {
+      const rotate = (d.angle * 180) / Math.PI - 90
+      const translate = d.outerRadius - 10
+
+      return `rotate(${rotate}) translate(${translate})`
+    }
+
+    arcs
+      .append("text")
+      .attr("transform", function (d) {
+        d.innerRadius = 0;
+        d.outerRadius = rayon;
+        d.angle = (d.startAngle + d.endAngle) / 2;
+
+        return createPathForText(d);
+      })
+      .attr("text-anchor", "end")
+      .text((d, i) => {
+        return data[i].label;
+      });
+
+    container.on("click", spin);
+
+    // Make arrow
+    const pathArrow = `M-${rayon * 0.15},0L0,${rayon * 0.05}L0,-${rayon * 0.05}Z`
+    svg
+      .append("g")
+      .attr(
+        "transform",
+        "translate(" +
+        (width + padding.left + padding.right) +
+        "," +
+        (height / 2 + padding.top) +
+        ")"
+      )
+      .append("path")
+      .attr("d", (pathArrow))
+      .style({ fill: "black" });
+
+    //draw spin circle
+    container
+      .append("circle")
+      .attr("cx", 0)
+      .attr("cy", 0)
+      .attr("r", 100)
+      .style({ fill: "white", cursor: "pointer" });
+    //spin text
+    container
+      .append("text")
+      .attr("x", 0)
+      .attr("y", 15)
+      .attr("text-anchor", "middle")
+      .text("100% gagnant")
+      .style({ "font-weight": "bold", "font-size": "20px" });
+
+    const rotTween = (to) => {
+      var i = d3.interpolate(oldrotation % 360, rotation);
+
+      return (t) => {
+        return `rotate(${i(t)})`;
+      };
+    }
+
+    function spin(d) {
+      container.on("click", null);
+
+      //all slices have been seen, all done
+      console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+      if (oldpick.length == data.length) {
+        console.log("done");
+        container.on("click", null);
+
+        return;
+      }
+
+      const ps = 360 / data.length
+      const rng = Math.floor(Math.random() * 1440 + 360);
+
+      rotation = Math.round(rng / ps) * ps;
+
+      picked = Math.round(data.length - (rotation % 360) / ps);
+      picked = picked >= data.length ? picked % data.length : picked;
+
+      if (oldpick.indexOf(picked) !== -1) {
+        d3.select(this).call(spin);
+
+        return;
+      } else {
+        oldpick.push(picked);
+      }
+
+      rotation += 90 - Math.round(ps / 2);
+      vis
+        .transition()
+        .duration(3000)
+        .attrTween("transform", rotTween)
+        .each("end", function () {
+          //mark question as seen
+          d3.select(".slice:nth-child(" + (picked + 1) + ") path").attr(
+            "fill",
+            "#111"
+          );
+          //populate question
+          d3.select("#question h1").text(data[picked].question);
+          oldrotation = rotation;
+
+          /* Get the result value from object "data" */
+          console.log(data[picked].value);
+
+          /* Comment the below line for restrict spin to sngle time */
+          container.on("click", spin);
+        });
+    }
+
+    function getRandomNumbers() {
+      var array = new Uint16Array(1000);
+      var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
+      if (
+        window.hasOwnProperty("crypto") &&
+        typeof window.crypto.getRandomValues === "function"
+      ) {
+        window.crypto.getRandomValues(array);
+        console.log("works");
+      } else {
+        //no support for crypto, get crappy random numbers
+        for (var i = 0; i < 1000; i++) {
+          array[i] = Math.floor(Math.random() * 100000) + 1;
+        }
+      }
+      return array;
+    }
+
+  </script>
+</body>
+
+</html>
