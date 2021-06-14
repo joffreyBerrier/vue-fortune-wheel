@@ -1,10 +1,19 @@
 {
-  "name": "my-project",
-  "version": "0.0.0",
+  "name": "vue-wheel",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vuedx-typecheck . && vite build",
     "serve": "vite preview"
+  },
+  "files": ["dist"],
+  "main": "./dist/vue-wheel.umd.js",
+  "module": "./dist/vue-wheel.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-wheel.es.js",
+      "require": "./dist/vue-wheel.umd.js"
+    }
   },
   "dependencies": {
     "d3": "^6.7.0",

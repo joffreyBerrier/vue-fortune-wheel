@@ -1,19 +1,59 @@
 <template>
   <div class="wrap">
-    <HelloWorld />
+    <Wheel ref="wheel" v-model="gift" :data="data" :color="color" @done="done"/>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { defineComponent } from "vue";
+import Wheel from "./components/Wheel.vue";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Wheel,
+  },
+  data() {
+    return {
+      gift: 1,
+      color: {
+        count: 3,
+        colors: ["#7d7db3", "#ffffff", "#c92729"],
+      },
+      data: [
+        {
+          value: "Fish and Chips",
+          id: 1,
+        },
+        {
+          value: "M in Black Burger",
+          id: 2,
+        },
+        {
+          value: "Pack de 3 bières",
+          id: 3,
+        },
+        {
+          value: "Fish Balls x6",
+          id: 4,
+        },
+        {
+          value: "Jus de fruits",
+          id: 5,
+        },
+        {
+          value: "Dessert maison",
+          id: 6,
+        },
+      ],
+    };
+  },
+  methods: {
+    done(r) {
+      console.log(r)
+    }
   }
-})
+});
 </script>
 
 <style>
