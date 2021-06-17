@@ -15,7 +15,7 @@ export default defineComponent({
   },
   data() {
     return {
-      gift: 1,
+      gift: 5,
       colors: ["#7d7db3", "#ffffff", "#c92729"],
       data: [
         {

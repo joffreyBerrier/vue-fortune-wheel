@@ -11,14 +11,14 @@ import * as d3 from "d3";
 import { ref, defineComponent, PropType } from "vue";
 
 interface Data {
-  value: string
-  id: number
+  value: string;
+  id: number;
 }
 
 interface Color {
-  colors: string[]
-  count: string
-  sucess: string
+  colors: string[];
+  count: string;
+  sucess: string;
 }
 
 export default defineComponent({
@@ -26,17 +26,17 @@ export default defineComponent({
   props: {
     animDuration: {
       type: Number,
-      default: 5000
+      default: 4000,
     },
     colors: {
       type: Array as string[],
-      default: () => ([]),
+      default: () => [],
     },
     data: {
       type: Object as PropType<Data>,
       default: () => ({}),
       validator: (data: Data): boolean => {
-        return data.length <= 10
+        return data.length <= 10;
       },
     },
     modelValue: {
@@ -53,7 +53,7 @@ export default defineComponent({
       rotation: 0 as number,
       style: {
         width: 600,
-        height: 600
+        height: 600,
       },
       svg: null,
       vis: null,
@@ -62,7 +62,7 @@ export default defineComponent({
   mounted() {
     this.rayon = Math.min(this.style.width, this.style.height - 10) / 2;
 
-    this.createWheel()
+    this.createWheel();
   },
   methods: {
     createWheel() {
@@ -84,7 +84,7 @@ export default defineComponent({
     },
     createSvg() {
       const screenWidth = window.innerWidth;
-      const margin = 100
+      const margin = 100;
       const width = Math.min(screenWidth, this.style.width) + margin;
       const height = Math.min(screenWidth, this.style.width) + margin;
 
@@ -175,12 +175,14 @@ export default defineComponent({
         .each(function (d, i) {
           const firstArcSection = /(^.+?)L/;
 
-          let newArc = firstArcSection.exec(d3.select(this).attr("d"))[1].replace(/,/g, " ");
+          let newArc = firstArcSection
+            .exec(d3.select(this).attr("d"))[1]
+            .replace(/,/g, " ");
 
           if (d.endAngle > (90 * Math.PI) / 180) {
-            const startLoc = /M(.*?)A/
-            const middleLoc = /A(.*?)0 0 1/
-            const endLoc = /0 0 1 (.*?)$/
+            const startLoc = /M(.*?)A/;
+            const middleLoc = /A(.*?)0 0 1/;
+            const endLoc = /0 0 1 (.*?)$/;
             const newStart = endLoc.exec(newArc)[1];
             const newEnd = startLoc.exec(newArc)[1];
             const middleSec = middleLoc.exec(newArc)[1];
@@ -248,7 +250,7 @@ export default defineComponent({
         .append("path")
         .attr("d", pathArrow)
         .attr("transform", "translate(-20, -300)")
-        .attr("stroke", '#ffffff')
+        .attr("stroke", "#ffffff")
         .attr("fill", "#FFFFFF")
         .attr("filter", "url(#shadow)")
         .attr("transform", "matrix(1, 0, 0, 1, -95, -350)")
@@ -260,31 +262,35 @@ export default defineComponent({
     },
     async spin(d) {
       if (!this.clicked) {
-        this.clicked = true
+        this.clicked = true;
 
         // Define current gain
         const slicedGift = this.findCurrentSlice(this.modelValue);
 
+        console.log(slicedGift);
+
         const dataLength = this.data.length;
         const sliceWidth = 360 / dataLength;
         const currentAngle = 360 - sliceWidth * (slicedGift - 1);
-        const numberOfRotation = 360;
-        const rotation = currentAngle * numberOfRotation;
+        const numberOfRotation = 360 * 5;
+        const rotation = currentAngle + numberOfRotation;
 
         this.rotation = Math.round(rotation / sliceWidth) * sliceWidth;
 
-        let picked = Math.round(dataLength - (this.rotation % 360) / sliceWidth);
+        let picked = Math.round(
+          dataLength - (this.rotation % 360) / sliceWidth
+        );
         picked = picked >= dataLength ? picked % dataLength : picked;
 
         // Center slice
-        const sliceSize = (360 / dataLength) + ((360 / dataLength) / 2) - 1
+        const sliceSize = 360 / dataLength + 360 / dataLength / 2 - 1;
         this.rotation += sliceSize - Math.round(sliceWidth * 2) + 1;
 
         const animateArrow = () => {
           return this.arrow
             .transition()
             .duration(this.animDuration)
-            .ease(d3.easeLinear)
+            .ease(d3.easeBackOut.overshoot(1.7))
             .attrTween("transform", this.animArrow)
             .end();
         };
@@ -293,7 +299,7 @@ export default defineComponent({
           return this.vis
             .transition()
             .duration(this.animDuration)
-            .ease(d3.easeLinear)
+            .ease(d3.easeBackOut.overshoot(1.7))
             .attrTween("transform", this.animRotation)
             .end();
         };
@@ -302,26 +308,26 @@ export default defineComponent({
 
         this.arrow.attr("transform", "matrix(1, 0, 0, 1, -95, -350)");
 
-        this.$emit('done', this.data[picked])
+        this.$emit("done", this.data[picked]);
       }
     },
     animArrow(to) {
-      const matrixPosition = [0, 0.17, 0, -0.17]
-      let countAnimationArrow = 0
+      const matrixPosition = [0, 0.17, 0, -0.17];
+      let countAnimationArrow = 0;
 
       return (t) => {
         countAnimationArrow += 1;
         if (countAnimationArrow === 4) {
-          countAnimationArrow = 0
+          countAnimationArrow = 0;
         }
 
-        const dynamicMatrixPosition = matrixPosition[countAnimationArrow]
+        const dynamicMatrixPosition = matrixPosition[countAnimationArrow];
 
         return `matrix(1, 0, ${dynamicMatrixPosition}, 1, -95, -350)`;
       };
     },
     animRotation(to) {
-      const i = d3.interpolate(0, this.rotation - (360 * 5));
+      const i = d3.interpolate(0, this.rotation);
 
       return (t) => {
         return `rotate(${i(t)})`;
