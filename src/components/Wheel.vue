@@ -16,8 +16,9 @@ interface Data {
 }
 
 interface Color {
-  count: string
   colors: string[]
+  count: string
+  sucess: string
 }
 
 export default defineComponent({
@@ -38,6 +39,9 @@ export default defineComponent({
     data: {
       type: Object as PropType<Data>,
       default: () => ({}),
+      validator: (data: Data): boolean => {
+        return data.length <= 10
+      },
     },
     modelValue: {
       type: Number,
@@ -277,7 +281,8 @@ export default defineComponent({
         picked = picked >= dataLength ? picked % dataLength : picked;
 
         // Center slice
-        this.rotation += 90 - Math.round(sliceWidth * 2) + 1;
+        const sliceSize = (360 / dataLength) + ((360 / dataLength) / 2) - 1
+        this.rotation += sliceSize - Math.round(sliceWidth * 2) + 1;
 
         const animateArrow = () => {
           return this.arrow
@@ -301,7 +306,7 @@ export default defineComponent({
 
         this.arrow.attr("transform", "matrix(1, 0, 0, 1, -95, -350)");
 
-        d3.select(`.slice:nth-child(${picked + 1})`).attr("fill", "#ffeb3b");
+        d3.select(`.slice:nth-child(${picked + 1})`).attr("fill", this.color.success);
 
         this.$emit('done', this.data[picked])
       }
@@ -331,20 +336,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
-
-body {
-  background: #00bcd4;
-}
-text {
-  color: white;
-  font-family: "Roboto";
-  font-weight: bold;
-  font-size: 1.3rem;
-}
-circle {
-  cursor: pointer;
-}
-</style>
