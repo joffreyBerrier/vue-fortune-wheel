@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Wheel ref="wheel" v-model="gift" :data="data" :color="color" @done="done" />
+    <Wheel ref="wheel" v-model="gift" :data="data" :colors="colors" @done="done" />
   </div>
 </template>
 
@@ -16,11 +16,7 @@ export default defineComponent({
   data() {
     return {
       gift: 1,
-      color: {
-        count: 3,
-        success: '#ffeb3b',
-        colors: ["#7d7db3", "#ffffff", "#c92729"],
-      },
+      colors: ["#7d7db3", "#ffffff", "#c92729"],
       data: [
         {
           value: "Fish and Chips",

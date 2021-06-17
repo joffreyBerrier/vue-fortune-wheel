@@ -28,13 +28,9 @@ export default defineComponent({
       type: Number,
       default: 5000
     },
-    countOfRotation: {
-      type: Number,
-      default: 6
-    },
-    color: {
-      type: Object as PropType<Color>,
-      default: () => ({}),
+    colors: {
+      type: Array as string[],
+      default: () => ([]),
     },
     data: {
       type: Object as PropType<Data>,
@@ -174,7 +170,7 @@ export default defineComponent({
         .attr("stroke", "#000000")
         .attr("stroke-width", "3")
         .attr("fill", (_, i) => {
-          return this.color.colors[i % this.color.count];
+          return this.colors[i % this.colors.length];
         })
         .each(function (d, i) {
           const firstArcSection = /(^.+?)L/;
@@ -252,7 +248,7 @@ export default defineComponent({
         .append("path")
         .attr("d", pathArrow)
         .attr("transform", "translate(-20, -300)")
-        .attr("stroke", this.color.arrowBg)
+        .attr("stroke", '#ffffff')
         .attr("fill", "#FFFFFF")
         .attr("filter", "url(#shadow)")
         .attr("transform", "matrix(1, 0, 0, 1, -95, -350)")
@@ -272,7 +268,7 @@ export default defineComponent({
         const dataLength = this.data.length;
         const sliceWidth = 360 / dataLength;
         const currentAngle = 360 - sliceWidth * (slicedGift - 1);
-        const numberOfRotation = 360 * this.countOfRotation;
+        const numberOfRotation = 360;
         const rotation = currentAngle * numberOfRotation;
 
         this.rotation = Math.round(rotation / sliceWidth) * sliceWidth;
@@ -305,8 +301,6 @@ export default defineComponent({
         await Promise.all([animateArrow(), animateVis()]);
 
         this.arrow.attr("transform", "matrix(1, 0, 0, 1, -95, -350)");
-
-        d3.select(`.slice:nth-child(${picked + 1})`).attr("fill", this.color.success);
 
         this.$emit('done', this.data[picked])
       }
