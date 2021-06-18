@@ -84,7 +84,7 @@ export default defineComponent({
     },
     createSvg() {
       const screenWidth = window.innerWidth;
-      const margin = 100;
+      const margin = 120;
       const width = Math.min(screenWidth, this.style.width) + margin;
       const height = Math.min(screenWidth, this.style.width) + margin;
 
@@ -266,9 +266,6 @@ export default defineComponent({
 
         // Define current gain
         const slicedGift = this.findCurrentSlice(this.modelValue);
-
-        console.log(slicedGift);
-
         const dataLength = this.data.length;
         const sliceWidth = 360 / dataLength;
         const currentAngle = 360 - sliceWidth * (slicedGift - 1);
@@ -283,8 +280,10 @@ export default defineComponent({
         picked = picked >= dataLength ? picked % dataLength : picked;
 
         // Center slice
-        const sliceSize = 360 / dataLength + 360 / dataLength / 2 - 1;
-        this.rotation += sliceSize - Math.round(sliceWidth * 2) + 1;
+        const sliceSize = sliceWidth + sliceWidth / 2;
+        this.rotation += sliceSize - Math.round(sliceWidth * 2);
+
+        this.interpolate = d3.interpolate(0, this.rotation);
 
         const animateArrow = () => {
           return this.arrow
@@ -312,13 +311,23 @@ export default defineComponent({
       }
     },
     animArrow(to) {
-      const matrixPosition = [0, 0.17, 0, -0.17];
+      let matrixPosition = [0, 0, 0.17, 0, 0, -0.17];
       let countAnimationArrow = 0;
 
       return (t) => {
         countAnimationArrow += 1;
-        if (countAnimationArrow === 4) {
+        if (countAnimationArrow === matrixPosition.length) {
           countAnimationArrow = 0;
+        }
+
+        // When animation is stopped for the first time
+        if (
+          Math.round(this.rotation * 1.1) === Math.round(this.interpolate(t))
+        ) {
+          matrixPosition = [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.17, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.17,
+          ];
         }
 
         const dynamicMatrixPosition = matrixPosition[countAnimationArrow];
@@ -327,10 +336,8 @@ export default defineComponent({
       };
     },
     animRotation(to) {
-      const i = d3.interpolate(0, this.rotation);
-
       return (t) => {
-        return `rotate(${i(t)})`;
+        return `rotate(${this.interpolate(t)})`;
       };
     },
   },
