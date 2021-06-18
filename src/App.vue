@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap" @click="$refs.wheel.spin">
     <Wheel ref="wheel" v-model="gift" :data="data" :colors="colors" @done="done" />
   </div>
 </template>
