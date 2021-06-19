@@ -5,8 +5,8 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   build: {
     lib: {
-      name: 'VueWheel',
-      entry: path.resolve(__dirname, 'src/main.ts'),
+      name: 'Wheel',
+      entry: path.resolve(__dirname, 'src/library.ts'),
     },
     rollupOptions: {
       external: ['vue'],
