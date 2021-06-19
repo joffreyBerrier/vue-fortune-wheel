@@ -1,5 +1,5 @@
 {
-  "name": "vue-wheel",
+  "name": "vue3-fortune-wheel",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
@@ -7,12 +7,12 @@
     "serve": "vite preview"
   },
   "files": ["dist"],
-  "main": "./dist/vue-wheel.umd.js",
-  "module": "./dist/vue-wheel.es.js",
+  "main": "./dist/vue3-fortune-wheel.umd.js",
+  "module": "./dist/vue3-fortune-wheel.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue-wheel.es.js",
-      "require": "./dist/vue-wheel.umd.js"
+      "import": "./dist/vue3-fortune-wheel.es.js",
+      "require": "./dist/vue3-fortune-wheel.umd.js"
     }
   },
   "dependencies": {

@@ -1,4 +1,4 @@
-# vue-wheel
+# vue3-fortune-wheel
 
 👊 An easier Wheel in Vue.js 👊
 
@@ -11,12 +11,12 @@
 Install the package:
 
 ```
-npm install vue-wheel --save
-yarn add vue-wheel
+npm install vue3-fortune-wheel --save
+yarn add vue3-fortune-wheel
 ```
 
 ```javascript
-import VueWheel from 'vue-wheel'
+import VueWheel from 'vue3-fortune-wheel'
 
 export default {
   components: {
@@ -26,7 +26,7 @@ export default {
 ```
 
 ```html
-<vue-wheel />
+<vue3-fortune-wheel />
 ```
 
 ## Data binding
