@@ -16,17 +16,17 @@ yarn add vue3-fortune-wheel
 ```
 
 ```javascript
-import VueWheel from 'vue3-fortune-wheel'
+import { Wheel } from 'vue3-fortune-wheel'
 
 export default {
   components: {
-    VueWheel,
+    Wheel,
   },
 }
 ```
 
 ```html
-<vue3-fortune-wheel />
+<Wheel />
 ```
 
 ## Data binding
