@@ -94,7 +94,7 @@ data: [
 ],
 ```
 
-### Img
+### ImgParams
 
 - Type: `Object`
 - Default: `{}`
