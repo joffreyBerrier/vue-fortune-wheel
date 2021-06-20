@@ -93,3 +93,20 @@ data: [
   },
 ],
 ```
+
+### Img
+
+- Type: `Object`
+- Default: `{}`
+
+Possible to add an image in the center
+
+#### Example :
+
+```javacript
+  {
+    src: string
+    width: number
+    height: number
+  }
+```
