@@ -1,6 +1,6 @@
 <template>
   <div class="wrap" @click="$refs.wheel.spin">
-    <Wheel ref="wheel" v-model="gift" :data="data" :colors="colors" @done="done" />
+    <Wheel ref="wheel" v-model="gift" :data="data" :colors="colors" @done="done" :img="logo"/>
   </div>
 </template>
 
@@ -43,6 +43,11 @@ export default defineComponent({
           id: 6,
         },
       ],
+      logo: {
+        src: 'https://placekitten.com/g/100/100',
+        width: 100,
+        height: 100
+      }
     };
   },
   methods: {
