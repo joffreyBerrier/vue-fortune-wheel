@@ -16,17 +16,17 @@ yarn add vue3-fortune-wheel
 ```
 
 ```javascript
-import VueWheel from 'vue3-fortune-wheel'
+import { Wheel } from 'vue3-fortune-wheel'
 
 export default {
   components: {
-    VueWheel,
+    Wheel,
   },
 }
 ```
 
 ```html
-<vue3-fortune-wheel />
+<Wheel />
 ```
 
 ## Data binding
@@ -92,4 +92,21 @@ data: [
     id: 5,
   },
 ],
+```
+
+### Img
+
+- Type: `Object`
+- Default: `{}`
+
+Possible to add an image in the center
+
+#### Example :
+
+```javacript
+  {
+    src: string
+    width: number
+    height: number
+  }
 ```
