@@ -11,6 +11,12 @@
     id: number
   }
 
+  interface Img {
+    src: string
+    width: number
+    height: number
+  }
+
   export default defineComponent({
     name: 'Wheel',
     props: {
@@ -32,6 +38,10 @@
       modelValue: {
         type: Number,
         required: true,
+      },
+      img: {
+        type: Object as PropType<Img>,
+        default: () => ({}),
       },
     },
     emits: ['done'],
@@ -89,6 +99,8 @@
         // Make circle
         this.createMiddleCircle()
         this.createBorderCircle()
+        // Add img
+        if (this.img) this.addImgOnCenter()
         // create arrow
         this.createArrow()
       },
@@ -258,6 +270,15 @@
           .attr('stroke-width', '8')
           .attr('filter', 'url(#shadow)')
           .attr('stroke', '#ffffff')
+      },
+      addImgOnCenter() {
+        this.container
+          .append("svg:image")
+          .attr('x', `-${this.img.width / 2}`)
+          .attr('y', `-${this.img.width / 2}`)
+          .attr('width', this.img.width)
+          .attr('height', this.img.height)
+          .attr("xlink:href", this.img.src)
       },
       createArrow() {
         const pathArrow =
