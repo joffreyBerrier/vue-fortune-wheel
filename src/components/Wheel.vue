@@ -11,7 +11,7 @@
     id: number
   }
 
-  interface Img {
+  interface imgParams {
     src: string
     width: number
     height: number
@@ -39,8 +39,8 @@
         type: Number,
         required: true,
       },
-      img: {
-        type: Object as PropType<Img>,
+      imgParams: {
+        type: Object as PropType<imgParams>,
         default: () => ({}),
       },
     },
@@ -100,7 +100,9 @@
         this.createMiddleCircle()
         this.createBorderCircle()
         // Add img
-        if (this.img) this.addImgOnCenter()
+        if (this.imgParams) {
+          this.addImgOnCenter()
+        }
         // create arrow
         this.createArrow()
       },
@@ -272,13 +274,15 @@
           .attr('stroke', '#ffffff')
       },
       addImgOnCenter() {
+        const { width, height, src } = this.imgParams
+
         this.container
-          .append("svg:image")
-          .attr('x', `-${this.img.width / 2}`)
-          .attr('y', `-${this.img.width / 2}`)
-          .attr('width', this.img.width)
-          .attr('height', this.img.height)
-          .attr("xlink:href", this.img.src)
+          .append('svg:image')
+          .attr('x', `-${width / 2}`)
+          .attr('y', `-${width / 2}`)
+          .attr('width', width)
+          .attr('height', height)
+          .attr('xlink:href', src)
       },
       createArrow() {
         const pathArrow =
@@ -304,7 +308,7 @@
       findCurrentSlice(index) {
         return this.data.findIndex((x) => x.id === index) + 1
       },
-      async spin(d) {
+      async spin() {
         if (!this.clicked) {
           this.clicked = true
 
