@@ -4,6 +4,13 @@
 
 🔥 Vue3 + Typescript 🔥
 
+
+# Sandbox example
+
+*Open this link on a new tab*
+
+[![Edit vue-wheel](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vue-wheel-rjgn0?fontsize=14&theme=dark&view=preview)
+
 ## Installation
 
 #### NPM / YARN
