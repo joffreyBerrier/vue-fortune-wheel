@@ -9,6 +9,7 @@
   interface Data {
     value: string
     id: number
+    color: string
   }
 
   interface imgParams {
@@ -23,10 +24,6 @@
       animDuration: {
         type: Number,
         default: 6000,
-      },
-      colors: {
-        type: Array as string[],
-        default: () => [],
       },
       data: {
         type: Object as PropType<Data>,
@@ -201,8 +198,8 @@
           .attr('d', arc)
           .attr('stroke', '#000000')
           .attr('stroke-width', '3')
-          .attr('fill', (_, i) => {
-            return this.colors[i % this.colors.length]
+          .attr('fill', (d, i) => {
+            return d.data.color
           })
           .each(function (d, i) {
             const firstArcSection = /(^.+?)L/

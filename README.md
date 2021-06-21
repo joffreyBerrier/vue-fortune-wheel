@@ -29,14 +29,25 @@ export default {
 <Wheel />
 ```
 
-## Data binding
+## Data binding 🐝
+
+This data corresponds to the id of your winning object. In my case an API returns me the id.
+If you are not in this case you can create a method that randomly chooses an id
+
+Exemple of this method
+
+```javascript
+randomGift() {
+  return Math.floor(Math.random() * this.data.lengh) + 1
+}
+```
+
 
 ### Gift
 - Type: `Number`
 - Default: `null`
 
 id of the gain / gift
-
 
 ## Props/Options
 
@@ -45,19 +56,6 @@ id of the gain / gift
 - Default: `5000`
 
 How many millisecondes you want the wheel to turn
-
-### Colors
-
-- Type: `Array`
-- Default: `[]`
-
-Array of colors you want to display on your wheel
-
-#### Example :
-
-```javacript
-  ["#7d7db3", "#ffffff", "#c92729"]
-```
 
 ### Data
 
@@ -74,22 +72,18 @@ data: [
   {
     value: "Gift 1",
     id: 1,
+    color: '#7d7db3'
+    color:
   },
   {
     value: "Gift 2",
     id: 2,
+    color: '#ffffff'
   },
   {
     value: "Gift 3",
     id: 3,
-  },
-  {
-    value: "Gift 4",
-    id: 4,
-  },
-  {
-    value: "Gift 5",
-    id: 5,
+    color: '#c92729'
   },
 ],
 ```
