@@ -1,6 +1,6 @@
 # vue3-fortune-wheel
 
-👊 An easier Wheel in Vue.js 👊
+👊 An easier fortune-wheel in Vue.js 👊
 
 🔥 Vue3 + Typescript 🔥
 
