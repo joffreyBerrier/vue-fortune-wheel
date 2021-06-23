@@ -69,28 +69,32 @@ How many millisecondes you want the wheel to turn
 - Type: `Array`
 - Default: `[]`
 
-* value: `string`
 * id: `number`
+* value: `string`
+* color: `string`
+* bgColor: `string`
 
 #### Example :
 
 ```javascript
 data: [
   {
-    value: "Gift 1",
     id: 1,
-    color: '#7d7db3'
-    color:
+    value: "Gift 1",
+    color: '#7d7db3',
+    bgColor: '#ffffff'
   },
   {
-    value: "Gift 2",
     id: 2,
-    color: '#ffffff'
+    value: "Gift 2",
+    color: '#ffffff',
+    bgColor: '#ffffff'
   },
   {
-    value: "Gift 3",
     id: 3,
-    color: '#c92729'
+    value: "Gift 3",
+    color: '#c92729',
+    bgColor: '#ffffff'
   },
 ],
 ```
