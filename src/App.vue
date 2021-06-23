@@ -18,34 +18,40 @@ export default defineComponent({
       gift: 5,
       data: [
         {
-          value: "Fish and Chips",
           id: 1,
-          color: '#7d7db3'
+          value: "Fish and Chips",
+          bgColor: '#7d7db3',
+          color: '#ffffff'
         },
         {
-          value: "M in Black Burger",
           id: 2,
+          value: "M in Black Burger",
+          bgColor: '#ffffff',
           color: '#ffffff'
         },
         {
-          value: "Pack de 3 bières",
           id: 3,
-          color: '#c92729'
-        },
-        {
-          value: "Fish Balls x6",
-          id: 4,
-          color: '#7d7db3'
-        },
-        {
-          value: "Jus de fruits",
-          id: 5,
+          value: "Pack de 3 bières",
+          bgColor: '#c92729',
           color: '#ffffff'
         },
         {
-          value: "Dessert maison",
+          id: 4,
+          value: "Fish Balls x6",
+          bgColor: '#7d7db3',
+          color: '#ffffff'
+        },
+        {
+          id: 5,
+          value: "Jus de fruits",
+          bgColor: '#ffffff',
+          color: '#ffffff'
+        },
+        {
           id: 6,
-          color: '#c92729'
+          value: "Dessert maison",
+          bgColor: '#c92729',
+          color: '#ffffff'
         },
       ],
       logo: {

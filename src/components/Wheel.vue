@@ -1,5 +1,5 @@
 <template>
-  <div id="wheel" class="wheel" :style="wheelStyle" />
+  <div id="wheel" :class="['wheel', `wheel_font-size--${data.length}`]" :style="wheelStyle" />
 </template>
 
 <script lang="ts">
@@ -7,8 +7,9 @@
   import { defineComponent, PropType } from 'vue'
 
   interface Data {
-    value: string
     id: number
+    value: string
+    bgColor: string
     color: string
   }
 
@@ -29,7 +30,7 @@
         type: Object as PropType<Data>,
         default: () => ({}),
         validator: (data: Data): boolean => {
-          return data.length <= 10
+          return data.length <= 8
         },
       },
       modelValue: {
@@ -199,7 +200,7 @@
           .attr('stroke', '#000000')
           .attr('stroke-width', '3')
           .attr('fill', (d, i) => {
-            return d.data.color
+            return d.data.bgColor
           })
           .each(function (d, i) {
             const firstArcSection = /(^.+?)L/
@@ -240,6 +241,9 @@
           .append('textPath')
           .attr('startOffset', '50%')
           .attr('text-anchor', 'middle')
+          .attr('fill', (d, i) => {
+            return d.data.color
+          })
           .attr('xlink:href', (d, i) => {
             return '#middleArc' + i
           })
@@ -353,10 +357,28 @@
   })
 </script>
 
-<style scoped>
+<style>
   .wheel {
     width: 100%;
     height: auto;
     margin: 0 auto;
+  }
+  .wheel textPath {
+    letter-spacing: 1px;
+    stroke: rgb(0 0 0 / 10%);
+  }
+  .wheel_font-size--1,
+  .wheel_font-size--2,
+  .wheel_font-size--3,
+  .wheel_font-size--4 {
+    font-size: 16px;
+  }
+  .wheel_font-size--5,
+  .wheel_font-size--6 {
+    font-size: 12px;
+  }
+  .wheel_font-size--7,
+  .wheel_font-size--8 {
+    font-size: 10px;
   }
 </style>
