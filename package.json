@@ -1,12 +1,16 @@
 {
   "name": "vue3-fortune-wheel",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "dev": "vite",
     "build": "vuedx-typecheck . && vite build",
     "serve": "vite preview"
   },
-  "files": ["dist"],
+  "files": [
+    "dist/*",
+    "types/*",
+    "*.json"
+  ],
   "main": "./dist/vue3-fortune-wheel.umd.js",
   "module": "./dist/vue3-fortune-wheel.es.js",
   "exports": {
@@ -15,6 +19,16 @@
       "require": "./dist/vue3-fortune-wheel.umd.js"
     }
   },
+  "keywords": [
+    "vue",
+    "vue-wheel",
+    "vuejs",
+    "typescript",
+    "vue3",
+    "vue-fortune-wheel",
+    "vue-fortune"
+  ],
+  "types": "./types/main.d.ts",
   "dependencies": {
     "d3": "^6.7.0",
     "vue": "^3.0.5"

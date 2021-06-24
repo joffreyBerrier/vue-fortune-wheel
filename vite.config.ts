@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   build: {
+    cssCodeSplit: false,
     lib: {
       name: 'Wheel',
       entry: path.resolve(__dirname, 'src/library.ts'),
