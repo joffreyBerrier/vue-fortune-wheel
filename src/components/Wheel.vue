@@ -5,19 +5,7 @@
 <script lang="ts">
   import * as d3 from 'd3'
   import { defineComponent, PropType } from 'vue'
-
-  interface Data {
-    id: number
-    value: string
-    bgColor: string
-    color: string
-  }
-
-  interface imgParams {
-    src: string
-    width: number
-    height: number
-  }
+  import { Data, imgParams } from '../../types/index'
 
   export default defineComponent({
     name: 'Wheel',
