@@ -36,7 +36,11 @@ export default {
 <Wheel />
 ```
 
-## Data binding 🐝
+## Props/Options
+
+### Gift
+- Type: `Number`
+- Default: `null`
 
 This data corresponds to the id of your winning object. In my case an API returns me the id.
 If you are not in this case you can create a method that randomly chooses an id
@@ -48,15 +52,6 @@ randomGift() {
   return Math.floor(Math.random() * this.data.lengh) + 1
 }
 ```
-
-
-### Gift
-- Type: `Number`
-- Default: `null`
-
-id of the gain / gift
-
-## Props/Options
 
 ### animDuration
 - Type: `Number`
