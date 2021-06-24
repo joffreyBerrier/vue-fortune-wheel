@@ -21,9 +21,9 @@
           return data.length <= 8
         },
       },
-      modelValue: {
+      gift: {
         type: Number,
-        required: true,
+        default: 0
       },
       imgParams: {
         type: Object as PropType<imgParams>,
@@ -302,7 +302,7 @@
           this.clicked = true
 
           // Define current gain
-          const slicedGift = this.findCurrentSlice(this.modelValue)
+          const slicedGift = this.findCurrentSlice(this.gift)
           const dataLength = this.data.length
           const sliceWidth = 360 / dataLength
           const currentAngle = 360 - sliceWidth * (slicedGift - 1)

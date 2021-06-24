@@ -1,6 +1,6 @@
 <template>
   <div class="wrap" @click="$refs.wheel.spin">
-    <Wheel ref="wheel" v-model="gift" :data="data" @done="done" :imgParams="logo"/>
+    <Wheel ref="wheel" :gift="gift" :data="data" @done="done" :imgParams="logo"/>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default defineComponent({
           id: 2,
           value: "M in Black Burger",
           bgColor: '#ffffff',
-          color: '#ffffff'
+          color: '#000000'
         },
         {
           id: 3,
@@ -45,7 +45,7 @@ export default defineComponent({
           id: 5,
           value: "Jus de fruits",
           bgColor: '#ffffff',
-          color: '#ffffff'
+          color: '#000000'
         },
         {
           id: 6,
