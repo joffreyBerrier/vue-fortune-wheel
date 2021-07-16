@@ -23,7 +23,10 @@ yarn add vue3-fortune-wheel
 
 ```javascript
 import { Wheel } from "vue3-fortune-wheel";
-import "vue3-fortune-wheel/style";
+// If you using vite
+import 'vue3-fortune-wheel/style'
+// If you not
+import 'vue3-fortune-wheel/dist/library.css'
 
 export default {
   components: {
