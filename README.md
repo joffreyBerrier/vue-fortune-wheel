@@ -4,10 +4,9 @@
 
 🔥 Vue3 + Typescript 🔥
 
-
 # Sandbox example
 
-*Open this link on a new tab*
+_Open this link on a new tab_
 
 [![Edit vue-wheel](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vue-wheel-rjgn0?fontsize=14&theme=dark&view=preview)
 
@@ -23,13 +22,14 @@ yarn add vue3-fortune-wheel
 ```
 
 ```javascript
-import { Wheel } from 'vue3-fortune-wheel'
+import { Wheel } from "vue3-fortune-wheel";
+import "vue3-fortune-wheel/style";
 
 export default {
   components: {
     Wheel,
   },
-}
+};
 ```
 
 ```html
@@ -39,6 +39,7 @@ export default {
 ## Props/Options
 
 ### Gift
+
 - Type: `Number`
 - Default: `null`
 
@@ -54,6 +55,7 @@ randomGift() {
 ```
 
 ### animDuration
+
 - Type: `Number`
 - Default: `5000`
 

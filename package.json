@@ -1,6 +1,6 @@
 {
   "name": "vue3-fortune-wheel",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vuedx-typecheck . && vite build",
@@ -17,7 +17,8 @@
     ".": {
       "import": "./dist/vue3-fortune-wheel.es.js",
       "require": "./dist/vue3-fortune-wheel.umd.js"
-    }
+    },
+    "./style": "./dist/library.css"
   },
   "keywords": [
     "vue",
