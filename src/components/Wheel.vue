@@ -334,6 +334,7 @@
           await animateVis()
 
           this.$emit('done', this.data[picked])
+          this.clicked = false;
         }
       },
       animRotation() {
