@@ -5,7 +5,7 @@
 <script lang="ts">
   import * as d3 from 'd3'
   import { defineComponent, PropType } from 'vue'
-  import { Data, imgParams } from '../../types/index'
+  import { Data, imgParams, bgParams } from '../../types/index'
 
   export default defineComponent({
     name: 'Wheel',
@@ -26,6 +26,10 @@
         default: 0
       },
       imgParams: {
+        type: Object as PropType<imgParams>,
+        default: () => ({}),
+      },
+      bgParams: {
         type: Object as PropType<imgParams>,
         default: () => ({}),
       },
@@ -82,9 +86,12 @@
         this.createArc()
         // Add the text
         this.addText()
+        // Add bg img
+        // if (this.bgParams) {
+        //   this.addImgOnBackground()
+        // }
         // Make circle
         this.createMiddleCircle()
-        this.createBorderCircle()
         // Add img
         if (this.imgParams) {
           this.addImgOnCenter()
@@ -161,8 +168,19 @@
       createVis() {
         this.container = this.svg.append('g').attr('class', 'wheelholder')
 
-        // Create a G on container
+        if (this.bgParams) {
+          const { width, height, src } = this.bgParams
+
+          this.vis = this.container.append('g').append('svg:image')
+          .attr('x', `-${width / 2}`)
+          .attr('y', `-${width / 2}`)
+          .attr('width', width)
+          .attr('height', height)
+          .attr('xlink:href', src)
+        } else {
+          // Create a G on container
         this.vis = this.container.append('g')
+        }
 
         this.pie = d3
           .pie()
@@ -171,6 +189,7 @@
           })
           .padAngle(0.01)
           .sort(null)
+        
       },
       createArc() {
         const arc = d3.arc().outerRadius(this.rayon).innerRadius(0)
@@ -264,6 +283,17 @@
       },
       addImgOnCenter() {
         const { width, height, src } = this.imgParams
+
+        this.container
+          .append('svg:image')
+          .attr('x', `-${width / 2}`)
+          .attr('y', `-${width / 2}`)
+          .attr('width', width)
+          .attr('height', height)
+          .attr('xlink:href', src)
+      },
+      addImgOnBackground() {
+        const { width, height, src } = this.bgParams
 
         this.container
           .append('svg:image')
