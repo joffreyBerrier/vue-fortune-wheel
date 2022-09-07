@@ -86,10 +86,6 @@
         this.createArc()
         // Add the text
         this.addText()
-        // Add bg img
-        // if (this.bgParams) {
-        //   this.addImgOnBackground()
-        // }
         // Make circle
         this.createMiddleCircle()
         // Add img
@@ -283,17 +279,6 @@
       },
       addImgOnCenter() {
         const { width, height, src } = this.imgParams
-
-        this.container
-          .append('svg:image')
-          .attr('x', `-${width / 2}`)
-          .attr('y', `-${width / 2}`)
-          .attr('width', width)
-          .attr('height', height)
-          .attr('xlink:href', src)
-      },
-      addImgOnBackground() {
-        const { width, height, src } = this.bgParams
 
         this.container
           .append('svg:image')
