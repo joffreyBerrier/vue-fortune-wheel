@@ -188,7 +188,6 @@
           })
           .padAngle(0.01)
           .sort(null)
-        
       },
       createArc() {
         const arc = d3.arc().outerRadius(this.rayon).innerRadius(0)
