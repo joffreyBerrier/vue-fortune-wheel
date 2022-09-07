@@ -88,6 +88,9 @@
         this.addText()
         // Make circle
         this.createMiddleCircle()
+        if(!this.bgParams) {
+          this.createBorderCircle();
+        }
         // Add img
         if (this.imgParams) {
           this.addImgOnCenter()
