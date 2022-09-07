@@ -30,7 +30,7 @@
         default: () => ({}),
       },
       bgParams: {
-        type: Object as PropType<imgParams>,
+        type: Object as PropType<bgParams>,
         default: () => ({}),
       },
     },
