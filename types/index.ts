@@ -2,17 +2,19 @@
 // Project: vue3-fortune-wheel
 // Definitions by: Joffrey Berrier
 
-interface Data {
-  id: number
-  value: string
-  bgColor: string
-  color: string
-}
+type Data = {
+  id: number;
+  value: string;
+  bgColor: string;
+  color: string;
+};
 
-interface imgParams {
-  src: string
-  width: number
-  height: number
-}
+type Datas = Data[];
 
-export type { Data, imgParams };
+type imgParams = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+export type { Data, Datas, imgParams };
