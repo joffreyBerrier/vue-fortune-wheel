@@ -5,7 +5,7 @@
 <script lang="ts">
   import * as d3 from 'd3'
   import { defineComponent, PropType } from 'vue'
-  import { Data, imgParams } from '../../types/index'
+  import { Data, imgParams, bgParams } from '../../types/index'
 
   export default defineComponent({
     name: 'Wheel',
@@ -27,6 +27,10 @@
       },
       imgParams: {
         type: Object as PropType<imgParams>,
+        default: () => ({}),
+      },
+      bgParams: {
+        type: Object as PropType<bgParams>,
         default: () => ({}),
       },
     },
@@ -84,7 +88,9 @@
         this.addText()
         // Make circle
         this.createMiddleCircle()
-        this.createBorderCircle()
+        if(!this.bgParams) {
+          this.createBorderCircle();
+        }
         // Add img
         if (this.imgParams) {
           this.addImgOnCenter()
@@ -161,8 +167,19 @@
       createVis() {
         this.container = this.svg.append('g').attr('class', 'wheelholder')
 
-        // Create a G on container
+        if (this.bgParams) {
+          const { width, height, src } = this.bgParams
+
+          this.vis = this.container.append('g').append('svg:image')
+          .attr('x', `-${width / 2}`)
+          .attr('y', `-${width / 2}`)
+          .attr('width', width)
+          .attr('height', height)
+          .attr('xlink:href', src)
+        } else {
+          // Create a G on container
         this.vis = this.container.append('g')
+        }
 
         this.pie = d3
           .pie()

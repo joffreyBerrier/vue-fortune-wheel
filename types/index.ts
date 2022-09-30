@@ -15,4 +15,10 @@ interface imgParams {
   height: number
 }
 
-export type { Data, imgParams };
+interface bgParams {
+  src: string
+  width: number
+  height: number
+}
+
+export type { Data, imgParams, bgParams };

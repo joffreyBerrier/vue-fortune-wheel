@@ -6,6 +6,7 @@
       :data="data"
       @done="done"
       :imgParams="logo"
+      :bgParams="background"
     />
   </div>
 </template>
@@ -64,6 +65,11 @@ export default defineComponent({
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/2367px-Vue.js_Logo_2.svg.png",
         width: 100,
         height: 120,
+      },
+      background: {
+        src: "https://i.imgur.com/t528j1F.png",
+        width: 600,
+        height: 600,
       },
     };
   },
