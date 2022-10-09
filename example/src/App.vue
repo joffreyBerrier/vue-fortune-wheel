@@ -1,25 +1,25 @@
 <template>
   <div class="wrap" @click="launchWheel">
     <Wheel
-      ref="wheel"
       :gift="gift"
-      :data="data"
-      @done="done"
       :imgParams="logo"
+      @done="done"
+      ref="wheel"
+      v-model="data"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Datas, imgParams } from "../types/index";
-import { defineComponent, ref, Ref } from "vue";
-
-import Wheel from "./components/Wheel.vue";
+import type { Ref } from "vue";
+import { defineComponent, ref } from "vue";
+import { Wheel } from "vue3-fortune-wheel";
+import type { Datas, imgParams } from "vue3-fortune-wheel";
 
 export default defineComponent({
   setup() {
     const wheel = ref(null);
-    const data: Ref<Datas> = ref([
+    const data: Ref<any> = ref([
       {
         id: 1,
         value: "Gift 1",

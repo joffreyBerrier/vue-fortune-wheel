@@ -1,3 +1,1 @@
-import Wheel from './components/Wheel.vue'
-
-export { Wheel }
+export { default as Wheel } from "./Wheel.vue";

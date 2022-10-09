@@ -1,9 +1,9 @@
 {
   "name": "vue3-fortune-wheel",
-  "version": "1.1.0",
+  "version": "1.1.35",
   "scripts": {
-    "dev": "vite --host --port=3000",
     "build": "vuedx-typecheck . && vite build",
+    "dev": "vite --host --port=3000",
     "serve": "vite preview"
   },
   "files": [
@@ -11,14 +11,14 @@
     "types/*",
     "*.json"
   ],
-  "main": "./dist/vue3-fortune-wheel.umd.js",
-  "module": "./dist/vue3-fortune-wheel.es.js",
+  "main": "./dist/wheel-lib.umd.js",
+  "module": "./dist/wheel-lib.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue3-fortune-wheel.es.js",
-      "require": "./dist/vue3-fortune-wheel.umd.js"
+      "import": "./dist/wheel-lib.es.js",
+      "require": "./dist/wheel-lib.umd.js"
     },
-    "./style": "./dist/library.css"
+    "./style": "./dist/assets/dist/library.css"
   },
   "keywords": [
     "vue",
@@ -29,18 +29,21 @@
     "vue-fortune-wheel",
     "vue-fortune"
   ],
-  "types": "./types/main.d.ts",
+  "types": "./index.d.ts",
   "dependencies": {
     "d3": "7.6.1",
     "vue": "3.2.40"
   },
   "devDependencies": {
     "@types/d3": "^7.4.0",
+    "@types/node": "^18.8.3",
     "@vitejs/plugin-vue": "3.1.0",
     "@vue/compiler-sfc": "^3.0.5",
     "@vuedx/typecheck": "0.7.5",
     "@vuedx/typescript-plugin-vue": "0.7.5",
+    "tsup": "^6.2.3",
     "typescript": "4.8.4",
-    "vite": "3.1.4"
+    "vite": "3.1.4",
+    "vue-tsc": "^1.0.3"
   }
 }
