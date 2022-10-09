@@ -338,6 +338,7 @@ const spin = async () => {
     };
 
     await animateVis();
+    clicked.value = false;
 
     emit("done", props.modelValue[picked]);
   }
