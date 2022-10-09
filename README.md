@@ -1,4 +1,4 @@
-# vue3-fortune-wheel @1.1.4
+# vue3-fortune-wheel @1.1.6
 
 👊 An easier fortune-wheel in Vue.js 👊
 
