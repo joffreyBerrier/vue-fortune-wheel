@@ -1,4 +1,4 @@
-# vue3-fortune-wheel @1.1.0
+# vue3-fortune-wheel @1.1.4
 
 👊 An easier fortune-wheel in Vue.js 👊
 
@@ -23,16 +23,21 @@ yarn add vue3-fortune-wheel
 
 ```javascript
 import { Wheel } from "vue3-fortune-wheel";
-// If you using vite
-import 'vue3-fortune-wheel/style'
-// If you not
-import 'vue3-fortune-wheel/dist/library.css'
+import type { Datas, imgParams } from "vue3-fortune-wheel";
 
 export default {
   components: {
     Wheel,
   },
 };
+
+<Wheel
+  :gift="gift"
+  :imgParams="logo"
+  @done="done"
+  ref="wheel"
+  v-model="data"
+/>
 ```
 
 ```html
@@ -64,7 +69,7 @@ randomGift() {
 
 How many millisecondes you want the wheel to turn
 
-### Data
+### ModelValue
 
 - Type: `Array`
 - Default: `[]`
@@ -115,7 +120,6 @@ Possible to add an image in the center
     height: number
   }
 ```
-
 
 ## Contributing to development 💁‍♂️💁‍♀️
 
