@@ -30,7 +30,9 @@ export default {
     Wheel,
   },
 };
+```
 
+```html
 <Wheel
   :gift="gift"
   :imgParams="logo"
@@ -40,8 +42,30 @@ export default {
 />
 ```
 
-```html
-<Wheel />
+## How to launch the Wheel ?
+```vue
+<template>
+  <Wheel
+    :gift="gift"
+    :imgParams="logo"
+    @done="done"
+    ref="wheel"
+    v-model="data"
+  />
+</template>
+
+<script>
+export default defineComponent({
+  setup() {
+    const wheel = ref(null);
+    const launchWheel = () => {
+      wheel.value.spin();
+    };
+    
+    return { launchWheel }
+  }
+})
+<script>
 ```
 
 ## Props/Options
