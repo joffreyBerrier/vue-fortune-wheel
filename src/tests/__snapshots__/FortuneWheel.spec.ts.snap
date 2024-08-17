@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FortuneWheel > handles empty data gracefully 1`] = `
+<div
+  class="wheel wheel_font-size--0"
+  id="wheel"
+  style="width: 580px; height: 720px;"
+/>
+`;
+
+exports[`FortuneWheel > mounts component and renders correct structure 1`] = `"<div id="wheel" class="wheel wheel_font-size--3" style="width: 580px; height: 720px;"></div>"`;
+
+exports[`FortuneWheel > renders correctly with default props 1`] = `
+<div
+  class="wheel wheel_font-size--3"
+  id="wheel"
+  style="width: 580px; height: 720px;"
+/>
+`;
+
+exports[`FortuneWheel > renders correctly with middleCircle prop set to false 1`] = `
+<div
+  class="wheel wheel_font-size--3"
+  id="wheel"
+  style="width: 580px; height: 720px;"
+/>
+`;
+
+exports[`FortuneWheel > updates correctly when data changes 1`] = `
+<div
+  class="wheel wheel_font-size--4"
+  id="wheel"
+  style="width: 580px; height: 720px;"
+/>
+`;
