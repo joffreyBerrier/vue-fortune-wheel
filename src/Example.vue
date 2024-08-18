@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-// import { FortuneWheel } from '@/library'
-import { FortuneWheel } from '../dist/fortune-wheel.es.js'
+import { FortuneWheel } from '@/library'
+// import { FortuneWheel } from '../dist/fortune-wheel.es.js'
 
 import type { Data, ImgParams } from '../types'
 

@@ -26,8 +26,7 @@
     ".": {
       "import": "./dist/fortune-wheel.es.js",
       "require": "./dist/fortune-wheel.umd.js"
-    },
-    "./style": "./dist/style.css"
+    }
   },
   "keywords": [
     "vue",
