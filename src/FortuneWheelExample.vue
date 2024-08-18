@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FortuneWheel } from '@/library'
+import { FortuneWheel } from './index'
 // import { FortuneWheel } from '../dist/fortune-wheel.es.js'
 
-import type { Data, ImgParams } from '../types'
+import type { Data, ImgParams } from '@/types'
 
 const gift = ref(2)
 const wheel = ref<InstanceType<typeof FortuneWheel> | null>(null)

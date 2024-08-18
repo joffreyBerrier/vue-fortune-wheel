@@ -1,4 +1,4 @@
-import { createApp } from "vue";
-import App from "./Example.vue";
+import { createApp } from 'vue'
+import FortuneWheelExample from './FortuneWheelExample.vue'
 
-createApp(App).mount("#app");
+createApp(FortuneWheelExample).mount('#app')
