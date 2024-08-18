@@ -1,159 +1,162 @@
-# vue3-fortune-wheel @1.1.7
+# vue3-fortune-wheel v2.0.0
 
-👊 An easy-to-use fortune-wheel in Vue.js 👊
+👊 An easy-to-use fortune wheel component for Vue.js 3 👊
 
-🔥 Vue3 + Typescript 🔥
+🔥 Built with Vue 3 + TypeScript 🔥
 
-# Sandbox example
+## Features
 
-_Open this link on a new tab_
-
-[![Edit vue-wheel](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vue-wheel-rjgn0?fontsize=14&theme=dark&view=preview)
+- Customizable wheel segments
+- Animated spinning
+- Optional center image
+- TypeScript support
+- Accessible (with ARIA attributes)
 
 ## Installation
 
-#### NPM / YARN
-
-Install the package:
-
-```
-npm install vue3-fortune-wheel --save
-yarn add vue3-fortune-wheel
+```bash
+pnpm add vue3-fortune-wheel
 ```
 
-```javascript
-import { Wheel } from "vue3-fortune-wheel";
-import type { Datas, imgParams } from "vue3-fortune-wheel";
+## Usage
 
-export default {
-  components: {
-    Wheel,
-  },
-};
-```
-
-```html
-<Wheel
-  :gift="gift"
-  :imgParams="logo"
-  @done="done"
-  ref="wheel"
-  v-model="data"
-/>
-```
-
-## How to launch the Wheel ?
 ```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { FortuneWheel } from 'vue3-fortune-wheel'
+import type { Data, ImgParams } from 'vue3-fortune-wheel'
+
+const gift = ref(2)
+const wheel = ref<InstanceType<typeof FortuneWheel> | null>(null)
+const data = ref<Data[]>([
+  { id: 1, value: 'Gift 1', bgColor: '#7d7db3', color: '#ffffff' },
+  { id: 2, value: 'Gift 2', bgColor: '#ffffff', color: '#000000' }
+])
+
+// Optional: Center image
+const logo: ImgParams = {
+  src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/2367px-Vue.js_Logo_2.svg.png',
+  width: 100,
+  height: 120
+}
+
+const hasMiddleCircle = true
+
+const done = (result: Data) => {
+  console.log('Spin completed:', result)
+}
+</script>
+
 <template>
-  <Wheel
-    :gift="gift"
-    :imgParams="logo"
-    @done="done"
+  <FortuneWheel
     ref="wheel"
-    v-model="data"
+    v-model="gift"
+    :middle-circle="hasMiddleCircle"
+    :img-params="logo"
+    :data="data"
+    @done="done"
   />
 </template>
-
-<script>
-export default defineComponent({
-  setup() {
-    const wheel = ref(null);
-    const launchWheel = () => {
-      wheel.value.spin();
-    };
-    
-    return { launchWheel }
-  }
-})
-<script>
 ```
 
-## Props/Options
+## API
 
-### Gift
+### Props
 
-- Type: `Number`
-- Default: `null`
+| Prop         | Type        | Default | Description                               |
+| ------------ | ----------- | ------- | ----------------------------------------- |
+| v-model      | `number`    | `null`  | ID of the winning item                    |
+| data         | `Data[]`    | `[]`    | Array of wheel segments                   |
+| animDuration | `number`    | `5000`  | Spin animation duration in milliseconds   |
+| imgParams    | `ImgParams` | `{}`    | Configuration for center image (optional) |
+| middleCircle | `boolean`   | `true`  | Show/hide middle circle                   |
 
-This data corresponds to the id of your winning object. In my case an API returns me the id.
-If you are not in this case you can create a method that randomly chooses an id
+### Events
 
-Exemple of this method
+| Event | Payload | Description                        |
+| ----- | ------- | ---------------------------------- |
+| done  | `Data`  | Emitted when the spin is completed |
 
-```javascript
-randomGift() {
-  return Math.floor(Math.random() * this.data.lengh) + 1
+### Methods
+
+| Method | Description           |
+| ------ | --------------------- |
+| spin() | Starts the wheel spin |
+
+## Types
+
+```typescript
+interface Data {
+  id: number
+  value: string
+  color: string
+  bgColor: string
+}
+
+interface ImgParams {
+  src: string
+  width: number
+  height: number
 }
 ```
 
-### animDuration
+## Spinning the Wheel
 
-- Type: `Number`
-- Default: `5000`
+Use the `ref` to call the `spin` method:
 
-How many millisecondes you want the wheel to turn
+```typescript
+const wheel = ref<InstanceType<typeof FortuneWheel> | null>(null)
 
-### ModelValue
-
-- Type: `Array`
-- Default: `[]`
-
-* id: `number`
-* value: `string`
-* color: `string`
-* bgColor: `string`
-
-#### Example :
-
-```javascript
-data: [
-  {
-    id: 1,
-    value: "Gift 1",
-    color: '#7d7db3',
-    bgColor: '#ffffff'
-  },
-  {
-    id: 2,
-    value: "Gift 2",
-    color: '#ffffff',
-    bgColor: '#ffffff'
-  },
-  {
-    id: 3,
-    value: "Gift 3",
-    color: '#c92729',
-    bgColor: '#ffffff'
-  },
-],
+const launchWheel = () => {
+  wheel.value?.spin()
+}
 ```
 
-### ImgParams
+## Customization
 
-- Type: `Object`
-- Default: `{}`
+### Random Winner Selection
 
-Possible to add an image in the center
+If you need to randomly select a winner, you can use a method like this:
 
-#### Example :
-
-```javacript
-  {
-    src: string
-    width: number
-    height: number
-  }
+```typescript
+const randomGift = () => {
+  return Math.floor(Math.random() * data.value.length) + 1
+}
 ```
 
-## Contributing to development 💁‍♂️💁‍♀️
+## Development
 
-- First create an issue
-- Fork the repo from github.
-- Clone your forked repo and run: `yarn` or `npm i`
-- Then, make your changes on any branch you want and push it.
-- Naming your branch with the gitflow convention:
-  - Feature branches? [feature/issueId]
-  - Release branches? [release/issueId]
-  - Hotfix branches? [hotfix/issueId]
-  - Support branches? [support/issueId]
-- Finally, open a pull request on the official repo, using the source branch from your forked repo.
+### Setup
+
+1. Fork the repository
+2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/vue3-fortune-wheel.git`
+3. Install dependencies: `pnpm install`
+
+### Running Tests
+
+```bash
+pnpm run test:unit
+```
+
+### Contributing
+
+1. Create an issue describing the feature or bug
+2. Fork the repo and create a branch following the gitflow convention:
+   - Feature branches: `feature/issueId`
+   - Release branches: `release/issueId`
+   - Hotfix branches: `hotfix/issueId`
+   - Support branches: `support/issueId`
+3. Make your changes and push to your fork
+4. Open a pull request to the main repository
+
+## License
+
+[MIT License](LICENSE)
+
+## Support
+
+If you have any questions or need help, please open an issue on the GitHub repository.
+
+---
+
+Made with ❤️ by Joffrey Berrier

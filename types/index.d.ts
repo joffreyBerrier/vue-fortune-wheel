@@ -1,28 +1,20 @@
-// Type definitions for vue3-fortune-wheel 0.0.5
+// Type definitions for vue3-fortune-wheel 1.2.0
 // Project: vue3-fortune-wheel
 // Definitions by: Joffrey Berrier
+
 import type { Ref } from "vue";
 
 export type Data = {
-  id: number;
+  id: number | { valueOf(): number; };
   value: string;
   bgColor: string;
   color: string;
 };
 
-export type Datas = Data[];
+export type Datas = Data[]
 
-export type imgParams = {
+export type ImgParams = {
   src: string;
   width: number;
   height: number;
-};
-
-export type d3Data = {
-  data: Ref<Data>;
-  endAngle: number;
-  index: number;
-  padAngle: number;
-  startAngle: number;
-  value: number;
 };

@@ -1,1 +1,1 @@
-export { default as Wheel } from "./Wheel.vue";
+export { default as FortuneWheel } from "./FortuneWheel.vue";
