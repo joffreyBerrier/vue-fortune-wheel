@@ -1,29 +1,28 @@
-import { fileURLToPath, URL } from 'node:url'
-import path from "path";
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
+import { resolve } from 'path'
 
 export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
+  plugins: [
+    vue(),
+    dts({
+      insertTypesEntry: true,
+    }),
+  ],
   build: {
-    target: "esnext",
     lib: {
-      name: "FortuneWheel",
-      entry: path.resolve(__dirname, "src/library.ts"),
-      fileName: (format: string) => `fortune-wheel.${format}.js`,
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'FortuneWheel',
+      fileName: (format) => `fortune-wheel.${format}.js`,
     },
     rollupOptions: {
-      external: ["vue"],
+      external: ['vue'],
       output: {
         globals: {
-          vue: "Vue",
+          vue: 'Vue',
         },
       },
     },
   },
-});
+})

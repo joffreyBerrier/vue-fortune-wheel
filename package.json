@@ -1,31 +1,32 @@
 {
   "name": "vue3-fortune-wheel",
-  "version": "2.0.0",
+  "version": "2.0.1",
+  "description": "A Vue 3 Fortune Wheel component",
   "repository": "https://github.com/joffreyBerrier/vue3-fortune-wheel",
   "funding": "https://github.com/sponsors/joffreyBerrier",
   "license": "MIT",
   "author": "Joffrey Berrier <joffrey.berrier@gmail.com>",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "prepublishOnly": "npm run build"
   },
   "files": [
-    "dist/*",
-    "types/*",
-    "*.json"
+    "dist"
   ],
   "main": "./dist/fortune-wheel.umd.js",
   "module": "./dist/fortune-wheel.es.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/fortune-wheel.es.js",
-      "require": "./dist/fortune-wheel.umd.js"
+      "require": "./dist/fortune-wheel.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "keywords": [
@@ -37,10 +38,11 @@
     "vue-fortune-wheel",
     "wheel-of-fortune"
   ],
-  "types": "./dist/index.d.ts",
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
   "dependencies": {
-    "d3": "^7.9.0",
-    "vue": "^3.4.38"
+    "d3": "^7.9.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
@@ -62,6 +64,7 @@
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.7.3",
     "vitest": "^1.6.0",
+    "vue": "^3.4.38",
     "vue-tsc": "^2.0.21"
   },
   "engines": {

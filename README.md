@@ -1,8 +1,12 @@
-# vue3-fortune-wheel v2.0.0
+# vue3-fortune-wheel v2.0.1
 
 👊 An easy-to-use fortune wheel component for Vue.js 3 👊
 
 🔥 Built with Vue 3 + TypeScript 🔥
+
+## Codesandbox
+
+[![Edit joffreyBerrier/vue-fortune-wheel-codesandbox/main](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/joffreyBerrier/vue-fortune-wheel-codesandbox/main?embed=1)
 
 ## Features
 

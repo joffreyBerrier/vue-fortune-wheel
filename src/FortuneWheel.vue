@@ -3,7 +3,7 @@ import { computed, ref, onMounted, watch } from 'vue'
 import * as d3 from 'd3'
 
 import type { Arc, Pie } from 'd3'
-import type { Data, ImgParams } from '../types'
+import type { Data, ImgParams } from '@/types'
 
 const FULL_CIRCLE = 360
 const ROTATIONS = 5

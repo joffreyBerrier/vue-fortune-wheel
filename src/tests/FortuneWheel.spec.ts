@@ -21,14 +21,14 @@ describe('FortuneWheel', () => {
       value: 'Gift 3',
       bgColor: '#c92729',
       color: '#ffffff'
-    },
+    }
   ]
 
   it('renders correctly with default props', async () => {
     const wrapper = mount(FortuneWheel, {
       props: {
-        data: mockData,
-      },
+        data: mockData
+      }
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.element).toMatchSnapshot()
@@ -38,8 +38,8 @@ describe('FortuneWheel', () => {
     const wrapper = mount(FortuneWheel, {
       props: {
         data: mockData,
-        middleCircle: false,
-      },
+        middleCircle: false
+      }
     })
     await wrapper.vm.$nextTick()
     expect(wrapper.element).toMatchSnapshot()
@@ -48,17 +48,20 @@ describe('FortuneWheel', () => {
   it('updates correctly when data changes', async () => {
     const wrapper = mount(FortuneWheel, {
       props: {
-        data: mockData,
-      },
+        data: mockData
+      }
     })
     await wrapper.vm.$nextTick()
 
-    const newData = [...mockData, {
-      id: 4,
-      value: 'Gift 4',
-      bgColor: '#7d7db3',
-      color: '#ffffff'
-    },]
+    const newData = [
+      ...mockData,
+      {
+        id: 4,
+        value: 'Gift 4',
+        bgColor: '#7d7db3',
+        color: '#ffffff'
+      }
+    ]
     await wrapper.setProps({ data: newData })
     await wrapper.vm.$nextTick()
 
@@ -68,8 +71,8 @@ describe('FortuneWheel', () => {
   it('computes wheel size correctly', async () => {
     const wrapper = mount(FortuneWheel, {
       props: {
-        data: mockData,
-      },
+        data: mockData
+      }
     })
     await wrapper.vm.$nextTick()
     const wheelStyle = (wrapper.vm as any).wheelStyle
@@ -86,8 +89,8 @@ describe('FortuneWheel', () => {
   it('emits "done" event when spin is called', async () => {
     const wrapper = mount(FortuneWheel, {
       props: {
-        data: mockData,
-      },
+        data: mockData
+      }
     })
     await wrapper.vm.spin()
     expect(wrapper.emitted('done')).toBeTruthy()
@@ -125,7 +128,10 @@ describe('FortuneWheel', () => {
 
   it('renders large datasets without significant delay', async () => {
     const largeDataset = Array.from({ length: 100 }, (_, i) => ({
-      id: i, value: `Prize ${i}`, bgColor: '#000000', color: '#ffffff'
+      id: i,
+      value: `Prize ${i}`,
+      bgColor: '#000000',
+      color: '#ffffff'
     }))
     const start = performance.now()
     const wrapper = mount(FortuneWheel, {
