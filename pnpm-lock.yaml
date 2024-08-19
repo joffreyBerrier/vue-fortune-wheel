@@ -11,9 +11,6 @@ importers:
       d3:
         specifier: ^7.9.0
         version: 7.9.0
-      vue:
-        specifier: ^3.4.38
-        version: 3.4.38(typescript@5.4.5)
     devDependencies:
       '@rushstack/eslint-patch':
         specifier: ^1.8.0
@@ -72,6 +69,9 @@ importers:
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.15.0)(jsdom@24.1.1)
+      vue:
+        specifier: ^3.4.38
+        version: 3.4.38(typescript@5.4.5)
       vue-tsc:
         specifier: ^2.0.21
         version: 2.0.29(typescript@5.4.5)
