@@ -1,4 +1,4 @@
-# vue3-fortune-wheel v2.0.3
+# vue3-fortune-wheel v2.0.5
 
 👊 An easy-to-use fortune wheel component for Vue.js 3 👊
 
