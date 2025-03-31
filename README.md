@@ -78,6 +78,7 @@ const done = (result: Data) => {
 | animDuration | `number`    | `5000`  | Spin animation duration in milliseconds   |
 | imgParams    | `ImgParams` | `{}`    | Configuration for center image (optional) |
 | middleCircle | `boolean`   | `true`  | Show/hide middle circle                   |
+| autoSpin     | `boolean`   | `false` | Launch wheel directly after update modelValue |
 
 ### Events
 

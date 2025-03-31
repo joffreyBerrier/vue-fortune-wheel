@@ -58,14 +58,22 @@ const done = (r: Data) => {
 const launchWheel = () => {
   if (wheel.value) wheel.value.spin()
 }
+
+const defineModelValue = (value: number) => {
+  gift.value = value
+}
 </script>
 
 <template>
+  <button @click="defineModelValue(4)">Define modelValue to 4</button>
+  <p>ModelValue: {{ gift }}</p>
+
   <div class="wrap" @click="launchWheel">
     <FortuneWheel
       ref="wheel"
       v-model="gift"
       :middle-circle="true"
+      :auto-spin="true"
       :imgParams="logo"
       :data="data"
       @done="done"

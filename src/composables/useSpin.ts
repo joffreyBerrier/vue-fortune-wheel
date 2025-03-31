@@ -25,6 +25,7 @@ export function useSpin(state: State, props: Props, emit: Emits) {
 
   const findCurrentSlice = (index: number): number => {
     if (props.data.length === 0) return 0
+
     return props.data.findIndex((x) => x.id === index) + 1
   }
 

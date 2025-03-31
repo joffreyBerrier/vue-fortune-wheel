@@ -13,20 +13,21 @@ interface Props {
   modelValue?: number
   imgParams?: ImgParams
   middleCircle?: boolean
+  autoSpin?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   animDuration: 6000,
   modelValue: 0,
   middleCircle: true,
-  imgParams: () => ({ src: '', width: 0, height: 0 })
+  imgParams: () => ({ src: '', width: 0, height: 0 }),
+  autoSpin: false
 })
 
 const emit = defineEmits<{
   (e: 'done', value: Data): void
+  (e: 'update:modelValue', value: number): void
 }>()
-
-const { wheelSize, wheelStyle } = useWheelSize(props)
 
 const state = reactive({
   pieGenerator: null as Pie<any, Data> | null,
@@ -39,11 +40,17 @@ const state = reactive({
   svg: null as SVGGElement | null,
   vis: null as SVGGElement | null
 })
-
+  
+const { wheelSize, wheelStyle } = useWheelSize(props)
 const { createWheel, redrawWheel } = useWheelCreation(state, props, wheelSize)
 const { spin } = useSpin(state, props, emit)
 
 watch(() => props.data, redrawWheel, { deep: true })
+watch(() => props.modelValue, (newValue, oldValue) => {
+  if (props.autoSpin && newValue !== oldValue) {
+    spin()
+  }
+})
 
 onMounted(() => {
   state.rayon = Math.min(wheelSize.value.width, wheelSize.value.height) / 2
