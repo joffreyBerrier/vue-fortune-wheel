@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { watch, onMounted, reactive } from 'vue'
+import { watch, onMounted, reactive, onUnmounted } from 'vue'
+import { useDebounceFn } from '@vueuse/core'
 import * as d3 from 'd3'
 import type { Arc, Pie } from 'd3'
 import type { Data, ImgParams } from '@/types'
@@ -45,9 +46,15 @@ const { wheelSize, wheelStyle } = useWheelSize(props)
 const { createWheel, redrawWheel } = useWheelCreation(state, props, wheelSize)
 const { spin } = useSpin(state, props, emit)
 
-watch(() => props.data, redrawWheel, { deep: true })
+const debouncedRedrawWheel = useDebounceFn(redrawWheel, 150)
+watch(() => props.data, debouncedRedrawWheel, { 
+  deep: true,
+
+  flush: 'post'
+})
+
 watch(() => props.modelValue, (newValue, oldValue) => {
-  if (props.autoSpin && newValue !== oldValue) {
+  if (props.autoSpin && newValue !== oldValue && !state.isSpinning) {
     spin()
   }
 })
@@ -55,11 +62,41 @@ watch(() => props.modelValue, (newValue, oldValue) => {
 onMounted(() => {
   state.rayon = Math.min(wheelSize.value.width, wheelSize.value.height) / 2
   createWheel()
+
+  const handleOrientationChange = () => {
+    setTimeout(() => {
+      state.rayon = Math.min(wheelSize.value.width, wheelSize.value.height) / 2
+      debouncedRedrawWheel()
+    }, 100)
+  }
+
+  window.addEventListener('orientationchange', handleOrientationChange)
+})
+
+onUnmounted(() => {
+  if (state.svg) {
+    d3.select(state.svg).remove()
+  }
 })
 
 defineExpose({ spin })
 </script>
 
 <template>
-  <div id="wheel" class="wheel" :style="wheelStyle" role="img" aria-label="Fortune Wheel" />
+  <div 
+    id="wheel" 
+    class="wheel" 
+    :style="wheelStyle" 
+    role="img" 
+    aria-label="Fortune Wheel"
+  />
 </template>
+
+<style scoped>
+.wheel {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+</style>

@@ -62,10 +62,21 @@ const launchWheel = () => {
 const defineModelValue = (value: number) => {
   gift.value = value
 }
+
+const addSomeData = () => {
+  data.value.push({
+    id: 7,
+    value: 'Gift 7',
+    bgColor: '#7d7db3',
+    color: '#ffffff'
+  })
+}
 </script>
 
 <template>
   <button @click="defineModelValue(4)">Define modelValue to 4</button>
+  <button @click="addSomeData">Add some data</button>
+  
   <p>ModelValue: {{ gift }}</p>
 
   <div class="wrap" @click="launchWheel">

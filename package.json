@@ -1,6 +1,6 @@
 {
   "name": "vue3-fortune-wheel",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A Vue 3 Fortune Wheel component",
   "repository": "https://github.com/joffreyBerrier/vue3-fortune-wheel",
   "funding": "https://github.com/sponsors/joffreyBerrier",
@@ -42,6 +42,7 @@
     "vue": "^3.4.0"
   },
   "dependencies": {
+    "@vueuse/core": "^13.0.0",
     "d3": "^7.9.0"
   },
   "devDependencies": {

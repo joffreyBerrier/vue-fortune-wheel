@@ -86,15 +86,17 @@ export function useWheelCreation(
   }
 
   const createWheel = () => {
-    createSvg()
-    createDefs()
-    createVis()
-    createArc()
-    addText()
-    if (props.middleCircle) createMiddleCircle()
-    createBorderCircle()
-    if (props.imgParams?.src) addImgOnCenter()
-    createArrow()
+    requestAnimationFrame(() => {
+      createSvg()
+      createDefs()
+      createVis()
+      createArc()
+      addText()
+      if (props.middleCircle) createMiddleCircle()
+      createBorderCircle()
+      if (props.imgParams?.src) addImgOnCenter()
+      createArrow()
+    })
   }
 
   const createSvg = () => {
@@ -236,8 +238,15 @@ export function useWheelCreation(
   }
 
   const redrawWheel = () => {
-    d3.select('#wheel').selectAll('*').remove()
-    createWheel()
+    if (!state.vis || !state.container) return
+
+    d3.select('#wheel').selectAll('.slice, .middleArcText, .hiddenarcs, .middleCircle, .borderCircle, .centerImage').remove()
+    
+    createArc()
+    addText()
+    if (props.middleCircle) createMiddleCircle()
+    createBorderCircle()
+    if (props.imgParams?.src) addImgOnCenter()
   }
 
   return { createWheel, redrawWheel }
