@@ -1,10 +1,8 @@
-import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { useDebounceFn } from '@vueuse/core'
+import { computed, ref, onMounted } from 'vue'
 import type { Data, ImgParams } from '@/types'
 
 const MAX_FONT_SIZE = 16
 const MARGIN = 20
-const DEBOUNCE_DELAY = 150
 
 interface Props {
   data: Data[]
@@ -20,21 +18,13 @@ export function useWheelSize(props: Props) {
       const screenWidth = window.innerWidth
       const width = Math.min(screenWidth, style.value.width) - MARGIN
       const height = Math.min(screenWidth, style.value.width) + 120
+
       dimensions.value = { width, height }
     }
   }
 
-  const debouncedUpdateDimensions = useDebounceFn(updateDimensions, DEBOUNCE_DELAY)
-
   onMounted(() => {
     updateDimensions()
-    window.addEventListener('resize', debouncedUpdateDimensions)
-    window.addEventListener('orientationchange', debouncedUpdateDimensions)
-  })
-
-  onUnmounted(() => {
-    window.removeEventListener('resize', debouncedUpdateDimensions)
-    window.removeEventListener('orientationchange', debouncedUpdateDimensions)
   })
 
   const wheelSize = computed(() => dimensions.value)
@@ -42,6 +32,7 @@ export function useWheelSize(props: Props) {
   const fontSize = computed(() => {
     if (props.data.length <= 4) return MAX_FONT_SIZE
     if (props.data.length <= 6) return 12
+
     return 10
   })
 
