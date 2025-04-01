@@ -1,15 +1,8 @@
 import { computed, ref, onMounted } from 'vue'
-import type { Data, ImgParams } from '@/types'
 
-const MAX_FONT_SIZE = 16
 const MARGIN = 20
 
-interface Props {
-  data: Data[]
-  imgParams?: ImgParams
-}
-
-export function useWheelSize(props: Props) {
+export function useWheelSize() {
   const style = ref<{ width: number }>({ width: 600 })
   const dimensions = ref({ width: 600, height: 600 })
 
@@ -28,20 +21,17 @@ export function useWheelSize(props: Props) {
   })
 
   const wheelSize = computed(() => dimensions.value)
-
-  const fontSize = computed(() => {
-    if (props.data.length <= 4) return MAX_FONT_SIZE
-    if (props.data.length <= 6) return 12
-
-    return 10
-  })
-
   const wheelStyle = computed(() => ({
     width: `${wheelSize.value.width}px`,
     height: `${wheelSize.value.height}px`,
-    fontSize: `${fontSize.value}px`,
-    margin: '0 auto'
+    margin: '0 auto',
+    'will-change': 'transform',
+    transform: 'translate3d(0,0,0)',
+    'backface-visibility': 'hidden',
+    'perspective': '1000px',
+    'contain': 'layout paint',
+    'isolation': 'isolate'
   }))
 
-  return { wheelSize, fontSize, wheelStyle }
+  return { wheelSize, wheelStyle }
 }

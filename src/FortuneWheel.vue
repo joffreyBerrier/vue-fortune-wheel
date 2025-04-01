@@ -1,28 +1,30 @@
 <script setup lang="ts">
-import { watch, onMounted, reactive, onUnmounted } from 'vue'
+import { watch, onMounted, onUnmounted, computed } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
-import * as d3 from 'd3'
-import type { Arc, Pie } from 'd3'
 import type { Data, ImgParams } from '@/types'
 import { useWheelSize } from './composables/useWheelSize'
 import { useWheelCreation } from './composables/useWheelCreation'
 import { useSpin } from './composables/useSpin'
 
-interface Props {
+export type WheelProps = {
   data: Data[]
-  animDuration?: number
-  modelValue?: number
-  imgParams?: ImgParams
   middleCircle?: boolean
+  imgParams?: ImgParams
+  fontFamily?: string
+  animDuration?: number
   autoSpin?: boolean
+  debug?: boolean
+  modelValue?: number
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<WheelProps>(), {
   animDuration: 6000,
+  autoSpin: false,
+  debug: false,
   modelValue: 0,
   middleCircle: true,
-  imgParams: () => ({ src: '', width: 0, height: 0 }),
-  autoSpin: false
+  fontFamily: 'Arial, sans-serif',
+  imgParams: () => ({ src: '', width: 0, height: 0 })
 })
 
 const emit = defineEmits<{
@@ -30,26 +32,16 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void
 }>()
 
-const state = reactive({
-  pieGenerator: null as Pie<any, Data> | null,
-  arcGenerator: null as Arc<any, d3.PieArcDatum<Data>> | null,
-  arrow: null as SVGElement | null,
-  container: null as SVGGElement | null,
-  rayon: 0,
-  rotation: 0,
-  isSpinning: false,
-  svg: null as SVGGElement | null,
-  vis: null as SVGGElement | null
-})
-  
-const { wheelSize, wheelStyle } = useWheelSize(props)
-const { createWheel, redrawWheel } = useWheelCreation(state, props, wheelSize)
+const isMobile = computed(() => window.innerWidth <= 768)
+
+const { wheelSize, wheelStyle } = useWheelSize()
+const { state, createWheel, redrawWheel, cleanup } = useWheelCreation(props, wheelSize, isMobile)
 const { spin } = useSpin(state, props, emit)
 
-const debouncedRedrawWheel = useDebounceFn(redrawWheel, 150)
+const debouncedRedrawWheel = useDebounceFn(redrawWheel, 250)
+
 watch(() => props.data, debouncedRedrawWheel, { 
   deep: true,
-
   flush: 'post'
 })
 
@@ -62,41 +54,47 @@ watch(() => props.modelValue, (newValue, oldValue) => {
 onMounted(() => {
   state.rayon = Math.min(wheelSize.value.width, wheelSize.value.height) / 2
   createWheel()
-
-  const handleOrientationChange = () => {
-    setTimeout(() => {
-      state.rayon = Math.min(wheelSize.value.width, wheelSize.value.height) / 2
-      debouncedRedrawWheel()
-    }, 100)
-  }
-
-  window.addEventListener('orientationchange', handleOrientationChange)
 })
 
 onUnmounted(() => {
-  if (state.svg) {
-    d3.select(state.svg).remove()
-  }
+  cleanup()
 })
 
-defineExpose({ spin })
+defineExpose({ spin, state })
 </script>
 
 <template>
-  <div 
+  <template v-if="debug && (state.error || state.isRendering)">
+    <div class="debug-container">
+      <div v-if="state.error">
+        {{ state.error }}
+      </div>
+      <div v-if="state.isRendering">
+        Chargement...
+      </div>
+    </div>
+  </template>
+
+  <div
     id="wheel" 
     class="wheel" 
-    :style="wheelStyle" 
+    :style="wheelStyle as any" 
     role="img" 
     aria-label="Fortune Wheel"
   />
 </template>
 
 <style scoped>
-.wheel {
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+.debug-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  z-index: 1000;
+  max-width: 300px;
+  font-size: 12px;
 }
 </style>

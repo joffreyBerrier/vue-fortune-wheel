@@ -3,7 +3,7 @@ import * as d3 from 'd3'
 import type { Data } from '@/types'
 
 const FULL_CIRCLE = 360
-const ROTATIONS = 5
+const ROTATIONS = 3
 
 interface Props {
   data: Data[]
@@ -25,7 +25,6 @@ export function useSpin(state: State, props: Props, emit: Emits) {
 
   const findCurrentSlice = (index: number): number => {
     if (props.data.length === 0) return 0
-
     return props.data.findIndex((x) => x.id === index) + 1
   }
 
@@ -57,8 +56,8 @@ export function useSpin(state: State, props: Props, emit: Emits) {
         await d3
           .select(state.vis)
           .transition()
-          .duration(props.animDuration)
-          .ease(d3.easeBackOut.overshoot(0.3))
+          .duration(props.animDuration * 0.6)
+          .ease(d3.easeQuadOut)
           .attrTween('transform', () => (t) => `rotate(${interpolate(t)})`)
           .end()
       }

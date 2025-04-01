@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { FortuneWheel } from './index'
-// import { FortuneWheel } from '../dist/fortune-wheel.es.js'
 
 import type { Data, ImgParams } from '@/types'
 
@@ -34,16 +33,10 @@ const data = ref<Data[]>([
   },
   {
     id: 5,
-    value: 'Gift 5',
     bgColor: '#ffffff',
-    color: '#000000'
+    color: '#000000',
+    value: 'Gift 5'
   },
-  {
-    id: 6,
-    value: 'Gift 6',
-    bgColor: '#c92729',
-    color: '#ffffff'
-  }
 ])
 const logo: ImgParams = {
   src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/2367px-Vue.js_Logo_2.svg.png',
@@ -84,7 +77,9 @@ const addSomeData = () => {
       ref="wheel"
       v-model="gift"
       :middle-circle="true"
+      font-family="Roboto, sans-serif"
       :auto-spin="true"
+      debug
       :imgParams="logo"
       :data="data"
       @done="done"

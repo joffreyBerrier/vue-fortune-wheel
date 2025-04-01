@@ -1,4 +1,4 @@
-# vue3-fortune-wheel v2.0.5
+# vue3-fortune-wheel v2.1.2
 
 👊 An easy-to-use fortune wheel component for Vue.js 3 👊
 
@@ -71,14 +71,16 @@ const done = (result: Data) => {
 
 ### Props
 
-| Prop         | Type        | Default | Description                               |
-| ------------ | ----------- | ------- | ----------------------------------------- |
-| v-model      | `number`    | `null`  | ID of the winning item                    |
-| data         | `Data[]`    | `[]`    | Array of wheel segments                   |
-| animDuration | `number`    | `5000`  | Spin animation duration in milliseconds   |
-| imgParams    | `ImgParams` | `{}`    | Configuration for center image (optional) |
-| middleCircle | `boolean`   | `true`  | Show/hide middle circle                   |
-| autoSpin     | `boolean`   | `false` | Launch wheel directly after update modelValue |
+| Prop         | Type        | Default | Description                                    |
+| ------------ | ----------- | ------- | ---------------------------------------------- |
+| v-model      | `number`    | `null`  | ID of the winning item                         |
+| data         | `Data[]`    | `[]`    | Array of wheel segments                        |
+| animDuration | `number`    | `5000`  | Spin animation duration in milliseconds        |
+| imgParams    | `ImgParams` | `{}`    | Configuration for center image (optional)      |
+| middleCircle | `boolean`   | `true`  | Show/hide middle circle                        |
+| autoSpin     | `boolean`   | `false` | Launch wheel directly after update modelValue  |
+| fontFamily   | `string`    | `Arial, sans-serif` | Typographie                        |
+| debug        | `boolean`   | `false`  | Show debug information                        |
 
 ### Events
 
