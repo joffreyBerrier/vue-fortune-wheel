@@ -1,8 +1,11 @@
 {
   "name": "vue3-fortune-wheel",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "A Vue 3 Fortune Wheel component",
-  "repository": "https://github.com/joffreyBerrier/vue3-fortune-wheel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joffreyBerrier/vue3-fortune-wheel.git"
+  },
   "funding": "https://github.com/sponsors/joffreyBerrier",
   "license": "MIT",
   "author": "Joffrey Berrier <joffrey.berrier@gmail.com>",
