@@ -273,15 +273,27 @@ export function useWheelCreation(
           const firstArcSection = /(^.+?)L/
           let newArc = firstArcSection.exec(d3.select(this).attr('d') || '')?.[1]?.replace(/,/g, ' ') || ''
 
-          if (d.endAngle > Math.PI / 2) {
-            const startLoc = /M(.*?)A/
-            const middleLoc = /A(.*?)0 0 1/
-            const endLoc = /0 0 1 (.*?)$/
-            const newStart = endLoc.exec(newArc)?.[1] || ''
-            const newEnd = startLoc.exec(newArc)?.[1] || ''
-            const middleSec = middleLoc.exec(newArc)?.[1] || ''
+          if (d.endAngle > Math.PI) {
+            const startLoc = /M([^ ]+) ([^ ]+)A/
+            const middleLoc = /A([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+)/
+            const endLoc = /([^ ]+) ([^ ]+)$/
 
-            newArc = `M${newStart}A${middleSec}0 0 0${newEnd}`
+            const startMatch = startLoc.exec(newArc)
+            const middleMatch = middleLoc.exec(newArc)
+            const endMatch = endLoc.exec(newArc)
+
+            if (startMatch && middleMatch && endMatch) {
+              const startX = startMatch[1]
+              const startY = startMatch[2]
+              const rx = middleMatch[1]
+              const ry = middleMatch[2]
+              const rotation = middleMatch[3]
+              const largeArc = middleMatch[4]
+              const endX = endMatch[1]
+              const endY = endMatch[2]
+
+              newArc = `M${endX} ${endY}A${rx} ${ry} ${rotation} ${largeArc} 0 ${startX} ${startY}`
+            }
           }
 
           d3.select(state.vis)
@@ -313,7 +325,7 @@ export function useWheelCreation(
         .data(arcs)
         .join('text')
         .attr('class', 'middleArcText')
-        .attr('dy', (d) => (d.endAngle > Math.PI / 2 ? -40 : 40))
+        .attr('dy', (d) => (d.endAngle > Math.PI ? -40 : 40))
         .append('textPath')
         .attr('startOffset', '50%')
         .attr('text-anchor', 'middle')

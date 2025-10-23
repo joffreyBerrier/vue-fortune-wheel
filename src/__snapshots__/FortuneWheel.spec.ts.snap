@@ -1,0 +1,153 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FortuneWheel - Text Rendering > should render 2 sections with valid arc paths and visible text 1`] = `
+"<svg font-size="16px" font-family="Arial, sans-serif" height="100%" width="100%" viewBox="0 0 620 720" shape-rendering="optimizeSpeed" aria-label="Fortune Wheel">
+  <defs>
+    <filter id="arrowShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feOffset in="SourceAlpha" dx="0" dy="0" result="offsetOut"></feOffset>
+      <feGaussianBlur stdDeviation="6" in="offsetOut" result="blurOut"></feGaussianBlur>
+      <feColorMatrix in="blurOut" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.20 0" result="shadowOut"></feColorMatrix>
+      <feBlend in="SourceGraphic" in2="shadowOut" mode="normal"></feBlend>
+    </filter>
+  </defs>
+  <g class="wrapper" transform="translate(310, 360)">
+    <g class="wheelholder">
+      <g>
+        <path class="slice" d="M0,-290A290,290,0,1,1,0,290L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M0,290A290,290,0,1,1,0,-290L0,0Z" stroke="#000000" stroke-width="4" fill="#ffffff" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="hiddenarcs" id="middleArc0" d="M0 -290A290 290 0 1 1 0 290" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc1" d="M0 -290A290 290 0 1 0 0 290" style="fill: none;"></path><text class="middleArcText" dy="40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="16px" letter-spacing="1px" href="#middleArc0">Gift 1</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#000000" font-family="Arial, sans-serif" font-size="16px" letter-spacing="1px" href="#middleArc1">Gift 2</textPath>
+        </text>
+      </g>
+      <circle cx="0" cy="0" r="116" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+      <path d="M 95.3 9.8 C 78.8 9.8 71.6 25.4 73.4 36.8 C 76.8 58.5 95.3 79 95.3 79 S 113.8 58.5 117.2 36.8 C 119 25.4 111.8 9.8 95.3 9.8 Z" stroke="#ffffff" fill="#FFFFFF" stroke-linejoin="round" stroke-width="4" filter="url(#arrowShadow)" transform="translate(-95, -340)"></path>
+      <circle cx="0" cy="0" r="114.4" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`FortuneWheel - Text Rendering > should render 3 sections with valid arc paths and visible text 1`] = `
+"<svg font-size="16px" font-family="Arial, sans-serif" height="100%" width="100%" viewBox="0 0 620 720" shape-rendering="optimizeSpeed" aria-label="Fortune Wheel">
+  <defs>
+    <filter id="arrowShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feOffset in="SourceAlpha" dx="0" dy="0" result="offsetOut"></feOffset>
+      <feGaussianBlur stdDeviation="6" in="offsetOut" result="blurOut"></feGaussianBlur>
+      <feColorMatrix in="blurOut" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.20 0" result="shadowOut"></feColorMatrix>
+      <feBlend in="SourceGraphic" in2="shadowOut" mode="normal"></feBlend>
+    </filter>
+  </defs>
+  <g class="wrapper" transform="translate(310, 360)">
+    <g class="wheelholder">
+      <g>
+        <path class="slice" d="M0,-290A290,290,0,0,1,251.147,145L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M251.147,145A290,290,0,0,1,-251.147,145L0,0Z" stroke="#000000" stroke-width="4" fill="#ffffff" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M-251.147,145A290,290,0,0,1,0,-290L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="hiddenarcs" id="middleArc0" d="M0 -290A290 290 0 0 1 251.147 145" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc1" d="M-251.147 145A290 290 0 0 0 251.147 145" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc2" d="M0 -290A290 290 0 0 0 -251.147 145" style="fill: none;"></path><text class="middleArcText" dy="40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="16px" letter-spacing="1px" href="#middleArc0">Gift 1</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#000000" font-family="Arial, sans-serif" font-size="16px" letter-spacing="1px" href="#middleArc1">Gift 2</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="16px" letter-spacing="1px" href="#middleArc2">Gift 3</textPath>
+        </text>
+      </g>
+      <circle cx="0" cy="0" r="116" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+      <path d="M 95.3 9.8 C 78.8 9.8 71.6 25.4 73.4 36.8 C 76.8 58.5 95.3 79 95.3 79 S 113.8 58.5 117.2 36.8 C 119 25.4 111.8 9.8 95.3 9.8 Z" stroke="#ffffff" fill="#FFFFFF" stroke-linejoin="round" stroke-width="4" filter="url(#arrowShadow)" transform="translate(-95, -340)"></path>
+      <circle cx="0" cy="0" r="114.4" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`FortuneWheel - Text Rendering > should render 4 sections with valid arc paths and visible text 1`] = `
+"<svg font-size="12px" font-family="Arial, sans-serif" height="100%" width="100%" viewBox="0 0 620 720" shape-rendering="optimizeSpeed" aria-label="Fortune Wheel">
+  <defs>
+    <filter id="arrowShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feOffset in="SourceAlpha" dx="0" dy="0" result="offsetOut"></feOffset>
+      <feGaussianBlur stdDeviation="6" in="offsetOut" result="blurOut"></feGaussianBlur>
+      <feColorMatrix in="blurOut" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.20 0" result="shadowOut"></feColorMatrix>
+      <feBlend in="SourceGraphic" in2="shadowOut" mode="normal"></feBlend>
+    </filter>
+  </defs>
+  <g class="wrapper" transform="translate(310, 360)">
+    <g class="wheelholder">
+      <g>
+        <path class="slice" d="M0,-290A290,290,0,0,1,290,0L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M290,0A290,290,0,0,1,0,290L0,0Z" stroke="#000000" stroke-width="4" fill="#ffffff" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M0,290A290,290,0,0,1,-290,0L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M-290,0A290,290,0,0,1,0,-290L0,0Z" stroke="#000000" stroke-width="4" fill="#ffffff" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="hiddenarcs" id="middleArc0" d="M0 -290A290 290 0 0 1 290 0" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc1" d="M290 0A290 290 0 0 1 0 290" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc2" d="M-290 0A290 290 0 0 0 0 290" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc3" d="M0 -290A290 290 0 0 0 -290 0" style="fill: none;"></path><text class="middleArcText" dy="40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc0">Gift 1</textPath>
+        </text><text class="middleArcText" dy="40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#000000" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc1">Gift 2</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc2">Gift 3</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#000000" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc3">Gift 4</textPath>
+        </text>
+      </g>
+      <circle cx="0" cy="0" r="116" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+      <path d="M 95.3 9.8 C 78.8 9.8 71.6 25.4 73.4 36.8 C 76.8 58.5 95.3 79 95.3 79 S 113.8 58.5 117.2 36.8 C 119 25.4 111.8 9.8 95.3 9.8 Z" stroke="#ffffff" fill="#FFFFFF" stroke-linejoin="round" stroke-width="4" filter="url(#arrowShadow)" transform="translate(-95, -340)"></path>
+      <circle cx="0" cy="0" r="114.4" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`FortuneWheel - Text Rendering > should render 5 sections with valid arc paths and visible text 1`] = `
+"<svg font-size="12px" font-family="Arial, sans-serif" height="100%" width="100%" viewBox="0 0 620 720" shape-rendering="optimizeSpeed" aria-label="Fortune Wheel">
+  <defs>
+    <filter id="arrowShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feOffset in="SourceAlpha" dx="0" dy="0" result="offsetOut"></feOffset>
+      <feGaussianBlur stdDeviation="6" in="offsetOut" result="blurOut"></feGaussianBlur>
+      <feColorMatrix in="blurOut" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.20 0" result="shadowOut"></feColorMatrix>
+      <feBlend in="SourceGraphic" in2="shadowOut" mode="normal"></feBlend>
+    </filter>
+  </defs>
+  <g class="wrapper" transform="translate(310, 360)">
+    <g class="wheelholder">
+      <g>
+        <path class="slice" d="M0,-290A290,290,0,0,1,275.806,-89.615L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M275.806,-89.615A290,290,0,0,1,170.458,234.615L0,0Z" stroke="#000000" stroke-width="4" fill="#ffffff" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M170.458,234.615A290,290,0,0,1,-170.458,234.615L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M-170.458,234.615A290,290,0,0,1,-275.806,-89.615L0,0Z" stroke="#000000" stroke-width="4" fill="#ffffff" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="slice" d="M-275.806,-89.615A290,290,0,0,1,0,-290L0,0Z" stroke="#000000" stroke-width="4" fill="#7d7db3" shape-rendering="auto" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="hiddenarcs" id="middleArc0" d="M0 -290A290 290 0 0 1 275.806 -89.615" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc1" d="M275.806 -89.615A290 290 0 0 1 170.458 234.615" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc2" d="M-170.458 234.615A290 290 0 0 0 170.458 234.615" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc3" d="M-275.806 -89.615A290 290 0 0 0 -170.458 234.615" style="fill: none;"></path>
+        <path class="hiddenarcs" id="middleArc4" d="M0 -290A290 290 0 0 0 -275.806 -89.615" style="fill: none;"></path><text class="middleArcText" dy="40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc0">Gift 1</textPath>
+        </text><text class="middleArcText" dy="40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#000000" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc1">Gift 2</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc2">Gift 3</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#000000" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc3">Gift 4</textPath>
+        </text><text class="middleArcText" dy="-40">
+          <textPath startOffset="50%" text-anchor="middle" stroke="#0000001a" fill="#ffffff" font-family="Arial, sans-serif" font-size="12px" letter-spacing="1px" href="#middleArc4">Gift 5</textPath>
+        </text>
+      </g>
+      <circle cx="0" cy="0" r="116" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+      <path d="M 95.3 9.8 C 78.8 9.8 71.6 25.4 73.4 36.8 C 76.8 58.5 95.3 79 95.3 79 S 113.8 58.5 117.2 36.8 C 119 25.4 111.8 9.8 95.3 9.8 Z" stroke="#ffffff" fill="#FFFFFF" stroke-linejoin="round" stroke-width="4" filter="url(#arrowShadow)" transform="translate(-95, -340)"></path>
+      <circle cx="0" cy="0" r="114.4" fill="#ffffff" stroke-width="4" stroke="#000000" filter="url(#arrowShadow)"></circle>
+      <circle cx="0" cy="0" r="288" fill="transparent" stroke-width="10" stroke="#ffffff" filter="url(#arrowShadow)"></circle>
+    </g>
+  </g>
+</svg>"
+`;
